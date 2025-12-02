@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothify - Simple</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Configure Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-slate-grey': '#1E4447',
+                        'dark-slate-grey-2': '#294340',
+                        'old-lace': '#F8F1E1',
+                        'old-lace-2': '#F6F0E3',
+                        'old-lace-3': '#F7F0E0',
+                    },
+                    backgroundImage: {
+                        'gradient-custom': 'linear-gradient(90deg, #1E4447, #294340)', // Simplified based on palette for buttons
+                        'gradient-radial': 'radial-gradient(#1E4447, #F8F1E1, #F6F0E3, #F7F0E0, #294340)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style for the range slider track */
+        input[type="range"]::-webkit-slider-runnable-track {
+            background: #F6F0E3; /* old-lace-2 */
+            height: 8px;
+            border-radius: 4px;
+            border: 1px solid #1E4447;
+        }
+        /* Style for the range slider thumb */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -5px;
+            width: 18px;
+            height: 18px;
+            background: #1E4447; /* dark-slate-grey */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="text-dark-slate-grey bg-old-lace font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-old-lace-2 shadow-sm fixed w-full z-50 border-b border-dark-slate-grey/10">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Logo - DOT REMOVED HERE -->
+            <div class="flex items-center gap-2 font-bold text-xl text-dark-slate-grey">
+                <a href="#"><img src="attachements/logo.png" alt="" style="width: 150px;"></a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#products" class="text-dark-slate-grey font-bold hover:text-dark-slate-grey-2 transition-colors">Shop</a>
+                <a href="#contact" class="text-dark-slate-grey/80 hover:text-dark-slate-grey transition-colors">Contact</a>
+                <button class="bg-gradient-custom text-old-lace px-6 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"><a href="login.html">Sign In</a></button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-dark-slate-grey text-xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden bg-old-lace-3 border-t border-dark-slate-grey/10 p-4 md:hidden">
+            <a href="#products" class="block py-2 text-dark-slate-grey font-bold">Shop</a>
+            <a href="#contact" class="block py-2 text-dark-slate-grey/80">Contact</a>
+        </div>
+    </nav>
+    
+    <!-- Products Grid and Filters -->
+    <section id="products" class="py-12 pt-24 bg-old-lace">
+        <div class="container mx-auto px-4">
+
+            <!-- FILTER BAR (FRONTEND ONLY) -->
+            <div class="bg-old-lace-2 p-6 rounded-xl shadow-md mb-8 border border-dark-slate-grey/5">
+                <h2 class="text-xl font-bold mb-4 text-dark-slate-grey">Filter Products</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    
+                    <!-- Search Input -->
+                    <div class="col-span-1">
+                        <label for="search-input" class="block text-sm font-medium text-dark-slate-grey/70 mb-1">Search Name / Vendor</label>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="e.g., Cotton Tee, Giza Textiles" 
+                            class="w-full p-2 bg-old-lace-3 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40"
+                        >
+                    </div>
+
+                    <!-- Category Dropdown -->
+                    <div class="col-span-1">
+                        <label for="category-filter" class="block text-sm font-medium text-dark-slate-grey/70 mb-1">Category</label>
+                        <select 
+                            id="category-filter" 
+                            class="w-full p-2 bg-old-lace-3 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey"
+                        >
+                            <!-- Hardcoded sample options -->
+                            <option value="">All Categories</option>
+                            <option value="Fabric">Fabric</option>
+                            <option value="T-Shirt">T-Shirt</option>
+                            <option value="Jacket">Jacket</option>
+                            <option value="Pants">Pants</option>
+                        </select>
+                    </div>
+
+                    <!-- Max Price Range Slider -->
+                    <div class="col-span-1 md:col-span-2">
+                        <!-- Label with fixed value since JS update logic is removed -->
+                        <label for="price-range" id="price-label" class="block text-sm font-medium text-dark-slate-grey/70 mb-1">Max Price: 5000 EGP</label>
+                        <input 
+                            type="range" 
+                            id="price-range" 
+                            min="100" 
+                            max="5000" 
+                            value="5000" 
+                            step="50"
+                            class="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                        >
+                    </div>
+
+                </div>
+            </div>
+            <!-- END FILTER BAR -->
+
+            <!-- Constants for easy reference -->
+            <script>
+                // Using the Grey Hoodie image as requested
+                const SINGLE_IMAGE_URL = "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+                const PLACEHOLDER_IMG_URL = 'https://placehold.co/500x300/e5e7eb/4b5563?text=Image+Unavailable';
+                // The URL to link to
+                const PRODUCT_LINK = "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+            </script>
+            
+            <!-- Product Grid -->
+            <div id="product-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                
+                <!-- Product 1 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                            <span class="absolute top-2 left-2 bg-dark-slate-grey-2 text-old-lace text-xs px-2 py-1 rounded font-semibold">Sale</span>
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">El-Nour Textiles</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Premium Cotton Tee - Bulk Order</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">150 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Cairo Leather</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Classic Biker Jacket - Cowhide</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">850 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Smart Wear</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Slim-Fit Oxford Shirt</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">210 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                            <span class="absolute top-2 left-2 bg-dark-slate-grey-2 text-old-lace text-xs px-2 py-1 rounded font-semibold">New</span>
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Luxury Fabrics</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Silk Roll (Red) - 100 Meter</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">900 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Blue Thread Co.</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Women's High-Rise Denim Jeans</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">350 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                            <span class="absolute top-2 right-2 bg-dark-slate-grey text-old-lace text-xs px-2 py-1 rounded font-semibold">Limited</span>
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Giza Textiles</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Egyptian Cotton Fabric - 500 Yard Roll</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">4500 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Comfort Wear Inc.</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Heavyweight Fleece Pullover Hoodie</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">280 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                            <span class="absolute top-2 left-2 bg-dark-slate-grey-2 text-old-lace text-xs px-2 py-1 rounded font-semibold">Best Seller</span>
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Shiny Bits</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Mixed Jewelry & Scarf Accessory Lot</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">750 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Summer Fashion</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Loose-Fit Pure Linen Sundress - Bulk</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">420 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Cold Weather Gear</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Premium Merino Wool Knit Scarf</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">195 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 11 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                            <span class="absolute top-2 right-2 bg-dark-slate-grey text-old-lace text-xs px-2 py-1 rounded font-semibold">Kids Line</span>
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Tiny Threads</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Organic Cotton Children's Sleepwear</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">120 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 12 -->
+                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
+                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
+                        <div class="h-48 overflow-hidden bg-gray-200 relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                class="w-full h-full object-cover hover:scale-105" 
+                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
+                                alt="Grey Hoodie"
+                            >
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Synth Fiber Ltd.</div>
+                        <h3 class="font-bold text-dark-slate-grey truncate">Durable Polyester Fabric - 200 Yard Roll</h3>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-lg font-bold text-dark-slate-grey">1800 EGP</span>
+                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Product Grid -->
+
+            <!-- See More Button -->
+            <div class="mt-12 text-center">
+                <button class="bg-gradient-custom px-8 py-3 text-old-lace rounded-full font-bold hover:opacity-90 transition-opacity shadow-md">See More Products</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-slate-grey-2 text-old-lace py-8" id="contact">
+        <div class="container mx-auto px-4 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <!-- Logo - DOT REMOVED HERE -->
+                <div class="mb-4 md:mb-0">
+                    <a href="#"><img src="attachements/logoWhite.png" alt="" style="width: 150px;"></a>
+                    <p class="text-old-lace/70 text-sm">Connecting the clothing industry.</p>
+                </div>
+                <div class="flex gap-6 text-sm text-old-lace/80">
+                    <a href="#products" class="hover:text-old-lace">Shop</a>
+                    <a href="#" class="hover:text-old-lace">About</a>
+                    <a href="#contact" class="hover:text-old-lace">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-dark-slate-grey mt-8 pt-8 text-center text-sm text-old-lace/50">
+                &copy; 2025 Clothify. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple JS for Mobile Menu - KEPT -->
+    <script>
+        // Event listener to toggle the mobile navigation menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Placeholder event listeners to prevent console errors if a user interacts with the empty fields
+        document.getElementById('search-input').addEventListener('input', () => console.log('Search input changed (No filtering logic enabled).'));
+        document.getElementById('category-filter').addEventListener('change', () => console.log('Category changed (No filtering logic enabled).'));
+        document.getElementById('price-range').addEventListener('input', (e) => {
+            document.getElementById('price-label').textContent = `Max Price: ${e.target.value} EGP`;
+            console.log('Price range changed (No filtering logic enabled).');
+        });
+    </script>
+</body>
+</html>

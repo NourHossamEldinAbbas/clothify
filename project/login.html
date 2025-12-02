@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothify - Sign In</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Configure Custom Colors (Theme from index.html) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-slate-grey': '#1E4447',
+                        'dark-slate-grey-2': '#294340',
+                        'old-lace': '#F8F1E1',
+                        'old-lace-2': '#F6F0E3',
+                        'old-lace-3': '#F7F0E0',
+                        // Google red, blue, green, yellow for the icon border effect
+                        'google-red': '#EA4335',
+                        'google-blue': '#4285F4',
+                        'google-green': '#34A853',
+                        'google-yellow': '#FBBC05',
+                    },
+                    backgroundImage: {
+                        'gradient-custom': 'linear-gradient(90deg, #1E4447, #294340)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom style for the subtle Google G icon */
+        .google-icon {
+            /* Create a G shape using colored borders on a parent element */
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            border-style: solid;
+            border-width: 2px;
+            border-color: transparent;
+            position: relative;
+        }
+
+        .google-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            /* Use a conic gradient or layered borders for the colors */
+            background: conic-gradient(
+                from 0deg, 
+                var(--tw-google-red) 0% 25%, 
+                var(--tw-google-blue) 25% 50%, 
+                var(--tw-google-green) 50% 75%, 
+                var(--tw-google-yellow) 75% 100%
+            );
+            /* Mask to make it look like a G stroke */
+            -webkit-mask: radial-gradient(circle at center, transparent 35%, black 40%);
+            mask: radial-gradient(circle at center, transparent 35%, black 40%);
+        }
+    </style>
+</head>
+<body class="bg-old-lace text-dark-slate-grey min-h-screen flex flex-col">
+    <a href="index.html"><img src="attachements/logo.png" alt="" width="600" style="margin: auto;"></a>
+    <!-- Main Content Area: Login Card -->
+    <!-- pt-20 added to offset the fixed navbar -->
+    <div class="flex items-center justify-center p-0">
+        <div class="w-full max-w-md bg-old-lace-3 p-8 rounded-xl shadow-2xl border border-dark-slate-grey/10">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-dark-slate-grey">Welcome Back</h1>
+                <p class="text-dark-slate-grey/70 mt-1">Sign in to access your Clothify account.</p>
+            </div>
+
+            <!-- Google Sign-In Button (Primary Placement) -->
+            <button 
+                type="button" 
+                class="w-full mb-6 bg-old-lace-2 text-dark-slate-grey border border-dark-slate-grey/20 px-4 py-3 rounded-lg text-lg font-bold hover:bg-old-lace-2 transition-colors shadow-md flex items-center justify-center gap-3"
+            >
+                <div class="google-icon"></div>
+                Sign in with Google
+            </button>
+
+            <!-- Separator -->
+            <div class="relative flex justify-center items-center mb-6">
+                <div class="flex-grow border-t border-dark-slate-grey/20"></div>
+                <span class="flex-shrink mx-4 text-sm text-dark-slate-grey/70 bg-old-lace-3 px-2">
+                    OR
+                </span>
+                <div class="flex-grow border-t border-dark-slate-grey/20"></div>
+            </div>
+
+            <!-- Form -->
+            <form id="login-form">
+                
+                <!-- Email Input -->
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="you@example.com" 
+                        required 
+                        class="w-full p-3 bg-old-lace-2 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40 transition-colors"
+                    >
+                </div>
+
+                <!-- Password Input -->
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter your password" 
+                        required 
+                        class="w-full p-3 bg-old-lace-2 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40 transition-colors"
+                    >
+                </div>
+
+                <!-- Action Buttons (Now pure UI) -->
+                <div class="space-y-4">
+                    <button 
+                        type="button" 
+                        class="w-full bg-gradient-custom text-old-lace px-4 py-3 rounded-lg text-lg font-bold hover:opacity-90 transition-opacity shadow-md flex items-center justify-center gap-2"
+                    >
+                        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                    </button>
+                    <button 
+                        type="button" 
+                        class="w-full bg-dark-slate-grey/80 text-old-lace px-4 py-3 rounded-lg text-lg font-bold hover:bg-dark-slate-grey transition-colors shadow-md flex items-center justify-center gap-2"
+                    >
+                        <i class="fa-solid fa-user-plus"></i> <a href="register.html">Sign up</a>
+                    </button>
+                </div>
+                
+                <!-- Other Links -->
+                <p class="text-center text-sm mt-6 text-dark-slate-grey/70">
+                    <a href="#" class="hover:underline">Forgot Password?</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Simple JS for Mobile Menu (Copied from index.html) -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

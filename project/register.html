@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothify - Join Us</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Configure Custom Colors (Theme from index.html) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-slate-grey': '#1E4447',
+                        'dark-slate-grey-2': '#294340',
+                        'old-lace': '#F8F1E1',
+                        'old-lace-2': '#F6F0E3',
+                        'old-lace-3': '#F7F0E0',
+                        // Google colors
+                        'google-red': '#EA4335',
+                        'google-blue': '#4285F4',
+                        'google-green': '#34A853',
+                        'google-yellow': '#FBBC05',
+                    },
+                    backgroundImage: {
+                        'gradient-custom': 'linear-gradient(90deg, #1E4447, #294340)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom style for the subtle Google G icon */
+        .google-icon {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            border-style: solid;
+            border-width: 2px;
+            border-color: transparent;
+            position: relative;
+        }
+
+        .google-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg, 
+                var(--tw-google-red) 0% 25%, 
+                var(--tw-google-blue) 25% 50%, 
+                var(--tw-google-green) 50% 75%, 
+                var(--tw-google-yellow) 75% 100%
+            );
+            -webkit-mask: radial-gradient(circle at center, transparent 35%, black 40%);
+            mask: radial-gradient(circle at center, transparent 35%, black 40%);
+        }
+    </style>
+</head>
+<body class="bg-old-lace text-dark-slate-grey min-h-screen flex flex-col">
+    
+    <a href="index.html"><img src="attachements/logo.png" alt="" width="600" style="margin: auto;"></a>
+    
+    <!-- Main Content: Register Card -->
+    <div class="flex items-center justify-center p-0">
+        <div class="w-full max-w-lg bg-old-lace-3 p-8 rounded-xl shadow-2xl border border-dark-slate-grey/10">
+            
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-dark-slate-grey">Create Account</h1>
+                <p class="text-dark-slate-grey/70 mt-1">Join the Clothify community today.</p>
+            </div>
+
+            <!-- Role Toggle (Client vs Owner) -->
+            <div class="mb-8 bg-old-lace-2 p-1 rounded-lg flex border border-dark-slate-grey/10 relative">
+                <!-- Hidden Radio Inputs for Logic -->
+                <input type="radio" name="role" id="role-client" value="client" class="hidden" checked>
+                <input type="radio" name="role" id="role-owner" value="owner" class="hidden">
+
+                <!-- Client Button -->
+                <label for="role-client" id="btn-client" class="flex-1 text-center py-2 rounded-md cursor-pointer transition-all duration-300 font-bold bg-dark-slate-grey text-old-lace shadow-md">
+                    <i class="fa-solid fa-bag-shopping mr-2"></i> Client
+                </label>
+
+                <!-- Owner Button -->
+                <label for="role-owner" id="btn-owner" class="flex-1 text-center py-2 rounded-md cursor-pointer transition-all duration-300 font-medium text-dark-slate-grey hover:bg-white/50">
+                    <i class="fa-solid fa-store mr-2"></i> Owner
+                </label>
+            </div>
+
+            <!-- Google Sign-Up -->
+            <button type="button" class="w-full mb-6 bg-old-lace-2 text-dark-slate-grey border border-dark-slate-grey/20 px-4 py-3 rounded-lg text-lg font-bold hover:bg-old-lace-2 transition-colors shadow-md flex items-center justify-center gap-3">
+                <div class="google-icon"></div>
+                Sign up with Google
+            </button>
+
+            <div class="relative flex justify-center items-center mb-6">
+                <div class="flex-grow border-t border-dark-slate-grey/20"></div>
+                <span class="flex-shrink mx-4 text-sm text-dark-slate-grey/70 bg-old-lace-3 px-2">OR</span>
+                <div class="flex-grow border-t border-dark-slate-grey/20"></div>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="register-form">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="first-name" class="block text-sm font-medium mb-1">First Name</label>
+                        <input type="text" id="first-name" placeholder="John" required class="w-full p-3 bg-old-lace-2 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40 transition-colors">
+                    </div>
+                    <div>
+                        <label for="last-name" class="block text-sm font-medium mb-1">Last Name</label>
+                        <input type="text" id="last-name" placeholder="Doe" required class="w-full p-3 bg-old-lace-2 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40 transition-colors">
+                    </div>
+                </div>
+
+                <!-- Business Name (Hidden by default, shown for Owners) -->
+                <div id="business-field" class="mb-4 hidden transition-all duration-300 ease-in-out">
+                    <label for="business-name" class="block text-sm font-medium mb-1">Business / Brand Name</label>
+                    <input type="text" id="business-name" placeholder="e.g. Clothify Textiles Ltd." class="w-full p-3 bg-old-lace-2 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40 transition-colors border-l-4 border-l-dark-slate-grey">
+                    <p class="text-xs text-dark-slate-grey/60 mt-1 ml-1">This will be displayed on your shop profile.</p>
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required class="w-full p-3 bg-old-lace-2 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40 transition-colors">
+                </div>
+
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required class="w-full p-3 bg-old-lace-2 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40 transition-colors">
+                </div>
+
+                <button type="button" class="w-full bg-dark-slate-grey text-old-lace px-4 py-3 rounded-lg text-lg font-bold hover:bg-dark-slate-grey-2 transition-colors shadow-md flex items-center justify-center gap-2">
+                    Create Account
+                </button>
+            </form>
+            
+            <p class="text-center text-sm mt-6 text-dark-slate-grey/70">
+                Already have an account? <a href="login.html" class="font-bold hover:underline text-dark-slate-grey">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Logic for Toggle -->
+    <script>
+        // Navbar Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Role Toggle Logic
+        const btnClient = document.getElementById('btn-client');
+        const btnOwner = document.getElementById('btn-owner');
+        const radioClient = document.getElementById('role-client');
+        const radioOwner = document.getElementById('role-owner');
+        const businessField = document.getElementById('business-field');
+
+        // Styles for active vs inactive buttons
+        const activeClasses = ['bg-dark-slate-grey', 'text-old-lace', 'shadow-md', 'font-bold'];
+        const inactiveClasses = ['text-dark-slate-grey', 'font-medium', 'hover:bg-white/50'];
+
+        function setRole(role) {
+            if (role === 'client') {
+                // Update Buttons
+                btnClient.classList.add(...activeClasses);
+                btnClient.classList.remove(...inactiveClasses);
+                
+                btnOwner.classList.remove(...activeClasses);
+                btnOwner.classList.add(...inactiveClasses);
+
+                // Update Radio
+                radioClient.checked = true;
+
+                // Hide Business Field
+                businessField.classList.add('hidden');
+            } else {
+                // Update Buttons
+                btnOwner.classList.add(...activeClasses);
+                btnOwner.classList.remove(...inactiveClasses);
+
+                btnClient.classList.remove(...activeClasses);
+                btnClient.classList.add(...inactiveClasses);
+
+                // Update Radio
+                radioOwner.checked = true;
+
+                // Show Business Field
+                businessField.classList.remove('hidden');
+            }
+        }
+
+        // Event Listeners
+        btnClient.addEventListener('click', () => setRole('client'));
+        btnOwner.addEventListener('click', () => setRole('owner'));
+
+    </script>
+</body>
+</html>
