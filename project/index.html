@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clothify - Simple</title>
+    <title>Clothify - Connect. Create. Wear.</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,455 +23,487 @@
                         'old-lace-3': '#F7F0E0',
                     },
                     backgroundImage: {
-                        'gradient-custom': 'linear-gradient(90deg, #1E4447, #294340)', // Simplified based on palette for buttons
-                        'gradient-radial': 'radial-gradient(#1E4447, #F8F1E1, #F6F0E3, #F7F0E0, #294340)'
+                        'gradient-custom': 'linear-gradient(90deg, #1E4447, #294340)',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     }
                 }
             }
         }
     </script>
-
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+        
+        /* Hide scrollbar for horizontal scrolling areas */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        /* Style for the range slider track */
-        input[type="range"]::-webkit-slider-runnable-track {
-            background: #F6F0E3; /* old-lace-2 */
-            height: 8px;
-            border-radius: 4px;
-            border: 1px solid #1E4447;
-        }
-        /* Style for the range slider thumb */
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            margin-top: -5px;
-            width: 18px;
-            height: 18px;
-            background: #1E4447; /* dark-slate-grey */
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body class="text-dark-slate-grey bg-old-lace font-sans">
+<body class="bg-old-lace text-dark-slate-grey font-sans antialiased">
 
-    <!-- Navbar -->
-    <nav class="bg-old-lace-2 shadow-sm fixed w-full z-50 border-b border-dark-slate-grey/10">
-        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <!-- Logo - DOT REMOVED HERE -->
-            <div class="flex items-center gap-2 font-bold text-xl text-dark-slate-grey">
-                <a href="#"><img src="attachements/logo.png" alt="" style="width: 150px;"></a>
-            </div>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-6">
-                <a href="#products" class="text-dark-slate-grey font-bold hover:text-dark-slate-grey-2 transition-colors">Shop</a>
-                <a href="#contact" class="text-dark-slate-grey/80 hover:text-dark-slate-grey transition-colors">Contact</a>
-                <button class="bg-gradient-custom text-old-lace px-6 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"><a href="login.html">Sign In</a></button>
-            </div>
-
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-old-lace/95 backdrop-blur-sm border-b border-dark-slate-grey/10 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between">
             <!-- Mobile Menu Button -->
-            <button id="menu-btn" class="md:hidden text-dark-slate-grey text-xl">
+            <button id="mobile-menu-btn" class="lg:hidden text-2xl text-dark-slate-grey">
                 <i class="fa-solid fa-bars"></i>
             </button>
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2">
+                 <!-- Using the uploaded logo file if available, otherwise text fallback -->
+                 <img src="attachements/logo.png" alt="Clothify" class="h-10 w-auto object-contain">
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-8 font-medium text-sm tracking-wide">
+                <a href="#new-arrivals" class="hover:text-dark-slate-grey/70 transition-colors">NEW ARRIVALS</a>
+                <a href="#sale" class="text-red-600 hover:text-red-700 transition-colors">SALE</a>
+                <a href="#collections" class="hover:text-dark-slate-grey/70 transition-colors">COLLECTIONS</a>
+                <a href="#fabrics" class="hover:text-dark-slate-grey/70 transition-colors">FABRICS</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="flex items-center gap-5 text-lg">
+                <button class="hover:text-dark-slate-grey/70 transition-colors hidden sm:block"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="login.html" class="hover:text-dark-slate-grey/70 transition-colors"><i class="fa-regular fa-user"></i></a>
+                <button class="hover:text-dark-slate-grey/70 transition-colors relative">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="absolute -top-2 -right-2 bg-dark-slate-grey text-old-lace text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden bg-old-lace-3 border-t border-dark-slate-grey/10 p-4 md:hidden">
-            <a href="#products" class="block py-2 text-dark-slate-grey font-bold">Shop</a>
-            <a href="#contact" class="block py-2 text-dark-slate-grey/80">Contact</a>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-old-lace border-b border-dark-slate-grey/10 shadow-lg lg:hidden">
+            <div class="flex flex-col p-4 space-y-4 font-medium">
+                <a href="#new-arrivals" class="block">New Arrivals</a>
+                <a href="#sale" class="block text-red-600">Sale</a>
+                <a href="#collections" class="block">Collections</a>
+                <a href="#fabrics" class="block">Fabrics</a>
+                <hr class="border-dark-slate-grey/10">
+                <a href="login.html" class="block">Sign In / Register</a>
+            </div>
         </div>
     </nav>
-    
-    <!-- Products Grid and Filters -->
-    <section id="products" class="py-12 pt-24 bg-old-lace">
+
+    <!-- Hero Section -->
+    <section class="relative h-[85vh] w-full overflow-hidden pt-20">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" alt="Fashion Hero" class="w-full h-full object-cover object-top opacity-90">
+            <div class="absolute inset-0 bg-gradient-to-r from-dark-slate-grey/40 to-transparent"></div>
+        </div>
+        
+        <!-- Content -->
+        <div class="relative container mx-auto px-4 h-full flex items-center">
+            <div class="max-w-xl text-old-lace space-y-6 animate-fade-in-up">
+                <span class="uppercase tracking-[0.2em] text-sm font-semibold border-l-2 border-old-lace pl-3">Winter Collection 2025</span>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold leading-tight">
+                    Refine Your <br> <span class="italic text-old-lace-3">Style.</span>
+                </h1>
+                <p class="text-lg text-old-lace/90 max-w-md">
+                    Connect with top factories, discover premium fabrics, and shop the latest trends all in one place.
+                </p>
+                <div class="pt-4 flex gap-4">
+                    <a href="#shop" class="bg-old-lace text-dark-slate-grey px-8 py-3 rounded-none font-bold hover:bg-white transition-colors">Shop Now</a>
+                    <a href="#fabrics" class="border border-old-lace text-old-lace px-8 py-3 rounded-none font-bold hover:bg-old-lace hover:text-dark-slate-grey transition-colors">Explore Fabrics</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee / Announcement Bar -->
+    <div class="bg-dark-slate-grey text-old-lace py-3 overflow-hidden whitespace-nowrap">
+        <div class="inline-block animate-marquee pl-10">
+            <span class="mx-8 text-sm tracking-widest">FREE SHIPPING ON ORDERS OVER 1000 EGP</span> • 
+            <span class="mx-8 text-sm tracking-widest">NEW FACTORY PARTNERS ADDED WEEKLY</span> • 
+            <span class="mx-8 text-sm tracking-widest">WINTER SALE IS LIVE - UP TO 50% OFF</span> •
+            <span class="mx-8 text-sm tracking-widest">FREE SHIPPING ON ORDERS OVER 1000 EGP</span> • 
+            <span class="mx-8 text-sm tracking-widest">NEW FACTORY PARTNERS ADDED WEEKLY</span>
+        </div>
+    </div>
+
+    <!-- ON SALE Section -->
+    <section id="sale" class="py-16 bg-old-lace container mx-auto px-4">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-3xl font-serif font-bold text-dark-slate-grey">On Sale</h2>
+                <p class="text-dark-slate-grey/60 mt-2">Limited time offers on premium items.</p>
+            </div>
+            <a href="#" class="text-sm font-bold border-b border-dark-slate-grey pb-1 hover:opacity-70">View All</a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Product Card 1 -->
+            <div class="group cursor-pointer">
+                <div class="relative overflow-hidden mb-3 aspect-[3/4]">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Jacket">
+                    <div class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 font-bold">-30%</div>
+                    <button class="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full shadow-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                        <i class="fa-solid fa-plus text-dark-slate-grey"></i>
+                    </button>
+                </div>
+                <h3 class="font-bold text-sm">Vintage Denim Jacket</h3>
+                <div class="flex gap-2 items-center text-sm mt-1">
+                    <span class="text-red-600 font-bold">550 EGP</span>
+                    <span class="text-dark-slate-grey/40 line-through text-xs">800 EGP</span>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="group cursor-pointer">
+                <div class="relative overflow-hidden mb-3 aspect-[3/4]">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Shirt">
+                    <div class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 font-bold">-20%</div>
+                    <button class="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full shadow-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                        <i class="fa-solid fa-plus text-dark-slate-grey"></i>
+                    </button>
+                </div>
+                <h3 class="font-bold text-sm">Oversized Linen Shirt</h3>
+                <div class="flex gap-2 items-center text-sm mt-1">
+                    <span class="text-red-600 font-bold">320 EGP</span>
+                    <span class="text-dark-slate-grey/40 line-through text-xs">400 EGP</span>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="group cursor-pointer">
+                <div class="relative overflow-hidden mb-3 aspect-[3/4]">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Tee">
+                    <div class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 font-bold">-15%</div>
+                    <button class="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full shadow-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                        <i class="fa-solid fa-plus text-dark-slate-grey"></i>
+                    </button>
+                </div>
+                <h3 class="font-bold text-sm">Cotton Basic Tee</h3>
+                <div class="flex gap-2 items-center text-sm mt-1">
+                    <span class="text-red-600 font-bold">180 EGP</span>
+                    <span class="text-dark-slate-grey/40 line-through text-xs">220 EGP</span>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="group cursor-pointer">
+                <div class="relative overflow-hidden mb-3 aspect-[3/4]">
+                    <img src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Accessory">
+                    <div class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 font-bold">-50%</div>
+                    <button class="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full shadow-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                        <i class="fa-solid fa-plus text-dark-slate-grey"></i>
+                    </button>
+                </div>
+                <h3 class="font-bold text-sm">Silver Chain Link</h3>
+                <div class="flex gap-2 items-center text-sm mt-1">
+                    <span class="text-red-600 font-bold">150 EGP</span>
+                    <span class="text-dark-slate-grey/40 line-through text-xs">300 EGP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Winter Collection Banner -->
+    <section id="winter" class="py-20 bg-dark-slate-grey relative overflow-hidden">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
+            <div class="w-full md:w-1/2 mb-10 md:mb-0 text-old-lace pr-0 md:pr-12">
+                <span class="text-sm font-bold tracking-widest uppercase text-old-lace/60 mb-2 block">Featured Collection</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Winter Warmth</h2>
+                <p class="text-old-lace/80 mb-8 leading-relaxed">
+                    Embrace the chill with our curated selection of heavyweight wools, thermal layers, and stylish outerwear designed for the modern wardrobe.
+                </p>
+                <a href="#" class="inline-block bg-old-lace text-dark-slate-grey px-8 py-3 font-bold hover:bg-white transition-colors">Shop Winter</a>
+            </div>
+            <div class="w-full md:w-1/2 relative">
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1548624149-f32194639909?q=80&w=600&auto=format&fit=crop" class="rounded-lg shadow-2xl transform translate-y-8" alt="Winter 1">
+                    <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?q=80&w=600&auto=format&fit=crop" class="rounded-lg shadow-2xl" alt="Winter 2">
+                </div>
+            </div>
+        </div>
+        <!-- Decorative bg circle -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-dark-slate-grey-2 rounded-full opacity-50 blur-3xl"></div>
+    </section>
+
+    <!-- Best Sellers (Slider-like layout) -->
+    <section id="best-sellers" class="py-16 bg-old-lace-3">
         <div class="container mx-auto px-4">
-
-            <!-- FILTER BAR (FRONTEND ONLY) -->
-            <div class="bg-old-lace-2 p-6 rounded-xl shadow-md mb-8 border border-dark-slate-grey/5">
-                <h2 class="text-xl font-bold mb-4 text-dark-slate-grey">Filter Products</h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                    
-                    <!-- Search Input -->
-                    <div class="col-span-1">
-                        <label for="search-input" class="block text-sm font-medium text-dark-slate-grey/70 mb-1">Search Name / Vendor</label>
-                        <input 
-                            type="text" 
-                            id="search-input" 
-                            placeholder="e.g., Cotton Tee, Giza Textiles" 
-                            class="w-full p-2 bg-old-lace-3 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey placeholder-dark-slate-grey/40"
-                        >
-                    </div>
-
-                    <!-- Category Dropdown -->
-                    <div class="col-span-1">
-                        <label for="category-filter" class="block text-sm font-medium text-dark-slate-grey/70 mb-1">Category</label>
-                        <select 
-                            id="category-filter" 
-                            class="w-full p-2 bg-old-lace-3 border border-dark-slate-grey/20 rounded-lg focus:ring-dark-slate-grey focus:border-dark-slate-grey text-dark-slate-grey"
-                        >
-                            <!-- Hardcoded sample options -->
-                            <option value="">All Categories</option>
-                            <option value="Fabric">Fabric</option>
-                            <option value="T-Shirt">T-Shirt</option>
-                            <option value="Jacket">Jacket</option>
-                            <option value="Pants">Pants</option>
-                        </select>
-                    </div>
-
-                    <!-- Max Price Range Slider -->
-                    <div class="col-span-1 md:col-span-2">
-                        <!-- Label with fixed value since JS update logic is removed -->
-                        <label for="price-range" id="price-label" class="block text-sm font-medium text-dark-slate-grey/70 mb-1">Max Price: 5000 EGP</label>
-                        <input 
-                            type="range" 
-                            id="price-range" 
-                            min="100" 
-                            max="5000" 
-                            value="5000" 
-                            step="50"
-                            class="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                        >
-                    </div>
-
-                </div>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-serif font-bold text-dark-slate-grey">Best Sellers</h2>
+                <div class="w-16 h-1 bg-dark-slate-grey mx-auto mt-4"></div>
             </div>
-            <!-- END FILTER BAR -->
 
-            <!-- Constants for easy reference -->
-            <script>
-                // Using the Grey Hoodie image as requested
-                const SINGLE_IMAGE_URL = "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-                const PLACEHOLDER_IMG_URL = 'https://placehold.co/500x300/e5e7eb/4b5563?text=Image+Unavailable';
-                // The URL to link to
-                const PRODUCT_LINK = "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-            </script>
+            <!-- Horizontal Scroll Container -->
+            <div class="flex overflow-x-auto space-x-6 pb-8 no-scrollbar snap-x">
+                
+                <!-- Item 1 -->
+                <div class="min-w-[280px] snap-center bg-old-lace p-3 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop" class="w-full h-64 object-cover rounded mb-4" alt="Hoodie">
+                    <h3 class="font-bold text-dark-slate-grey">Premium Hoodie</h3>
+                    <p class="text-sm text-dark-slate-grey/60 mb-2">Comfort Wear Inc.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold">280 EGP</span>
+                        <button class="text-xs uppercase font-bold tracking-wider border border-dark-slate-grey px-3 py-1 hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="min-w-[280px] snap-center bg-old-lace p-3 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <img src="https://images.unsplash.com/photo-1604176354204-9268737828c4?q=80&w=500&auto=format&fit=crop" class="w-full h-64 object-cover rounded mb-4" alt="Jeans">
+                    <h3 class="font-bold text-dark-slate-grey">High-Rise Denim</h3>
+                    <p class="text-sm text-dark-slate-grey/60 mb-2">Blue Thread Co.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold">350 EGP</span>
+                        <button class="text-xs uppercase font-bold tracking-wider border border-dark-slate-grey px-3 py-1 hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="min-w-[280px] snap-center bg-old-lace p-3 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <img src="https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?q=80&w=500&auto=format&fit=crop" class="w-full h-64 object-cover rounded mb-4" alt="Bag">
+                    <h3 class="font-bold text-dark-slate-grey">Leather Satchel</h3>
+                    <p class="text-sm text-dark-slate-grey/60 mb-2">Cairo Leather</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold">850 EGP</span>
+                        <button class="text-xs uppercase font-bold tracking-wider border border-dark-slate-grey px-3 py-1 hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 4 (Fabric) -->
+                <div class="min-w-[280px] snap-center bg-old-lace p-3 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <img src="https://images.unsplash.com/photo-1612459929878-8316df5fb88d?q=80&w=500&auto=format&fit=crop" class="w-full h-64 object-cover rounded mb-4" alt="Fabric">
+                    <h3 class="font-bold text-dark-slate-grey">Egyptian Cotton Roll</h3>
+                    <p class="text-sm text-dark-slate-grey/60 mb-2">Giza Textiles</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold">4500 EGP</span>
+                        <button class="text-xs uppercase font-bold tracking-wider border border-dark-slate-grey px-3 py-1 hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Categories -->
+    <section id="collections" class="py-16 bg-old-lace container mx-auto px-4">
+        <h2 class="text-3xl font-serif font-bold text-dark-slate-grey mb-8">Shop by Collection</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[500px] md:h-[400px]">
             
-            <!-- Product Grid -->
-            <div id="product-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                
-                <!-- Product 1 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                            <span class="absolute top-2 left-2 bg-dark-slate-grey-2 text-old-lace text-xs px-2 py-1 rounded font-semibold">Sale</span>
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">El-Nour Textiles</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Premium Cotton Tee - Bulk Order</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">150 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
+            <!-- Male -->
+            <a href="#" class="group relative overflow-hidden h-full">
+                <img src="https://images.unsplash.com/photo-1488161628813-994252a28ff4?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Men">
+                <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
+                <div class="absolute bottom-6 left-6 text-old-lace">
+                    <h3 class="text-2xl font-bold font-serif">Men</h3>
+                    <span class="text-sm underline opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Shop Now</span>
                 </div>
+            </a>
 
-                <!-- Product 2 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Cairo Leather</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Classic Biker Jacket - Cowhide</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">850 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
+            <!-- Female -->
+            <a href="#" class="group relative overflow-hidden h-full">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Women">
+                <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
+                <div class="absolute bottom-6 left-6 text-old-lace">
+                    <h3 class="text-2xl font-bold font-serif">Women</h3>
+                    <span class="text-sm underline opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Shop Now</span>
                 </div>
+            </a>
 
-                <!-- Product 3 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Smart Wear</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Slim-Fit Oxford Shirt</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">210 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
+            <!-- Fabrics -->
+            <a href="#" class="group relative overflow-hidden h-full">
+                <img src="https://images.unsplash.com/photo-1596280806458-757697c45f47?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Fabrics">
+                <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
+                <div class="absolute bottom-6 left-6 text-old-lace">
+                    <h3 class="text-2xl font-bold font-serif">Fabrics</h3>
+                    <span class="text-sm underline opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Wholesale</span>
                 </div>
+            </a>
 
-                <!-- Product 4 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                            <span class="absolute top-2 left-2 bg-dark-slate-grey-2 text-old-lace text-xs px-2 py-1 rounded font-semibold">New</span>
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Luxury Fabrics</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Silk Roll (Red) - 100 Meter</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">900 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
+             <!-- Accessories -->
+             <a href="#" class="group relative overflow-hidden h-full">
+                <img src="https://images.unsplash.com/photo-1509319117193-51043f65569c?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Accessories">
+                <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
+                <div class="absolute bottom-6 left-6 text-old-lace">
+                    <h3 class="text-2xl font-bold font-serif">Accessories</h3>
+                    <span class="text-sm underline opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Details</span>
                 </div>
-
-                <!-- Product 5 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Blue Thread Co.</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Women's High-Rise Denim Jeans</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">350 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                            <span class="absolute top-2 right-2 bg-dark-slate-grey text-old-lace text-xs px-2 py-1 rounded font-semibold">Limited</span>
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Giza Textiles</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Egyptian Cotton Fabric - 500 Yard Roll</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">4500 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 7 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Comfort Wear Inc.</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Heavyweight Fleece Pullover Hoodie</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">280 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 8 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                            <span class="absolute top-2 left-2 bg-dark-slate-grey-2 text-old-lace text-xs px-2 py-1 rounded font-semibold">Best Seller</span>
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Shiny Bits</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Mixed Jewelry & Scarf Accessory Lot</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">750 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 9 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Summer Fashion</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Loose-Fit Pure Linen Sundress - Bulk</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">420 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 10 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Cold Weather Gear</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Premium Merino Wool Knit Scarf</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">195 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 11 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                            <span class="absolute top-2 right-2 bg-dark-slate-grey text-old-lace text-xs px-2 py-1 rounded font-semibold">Kids Line</span>
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Tiny Threads</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Organic Cotton Children's Sleepwear</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">120 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 12 -->
-                <div class="bg-old-lace-3 rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:ring-1 hover:ring-dark-slate-grey/20">
-                    <a href="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" target="_blank" class="block">
-                        <div class="h-48 overflow-hidden bg-gray-200 relative">
-                            <img 
-                                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                                class="w-full h-full object-cover hover:scale-105" 
-                                onerror="this.onerror=null; this.src=PLACEHOLDER_IMG_URL;"
-                                alt="Grey Hoodie"
-                            >
-                        </div>
-                    </a>
-                    <div class="p-4">
-                        <div class="text-xs text-dark-slate-grey/60 mb-1 font-medium">Synth Fiber Ltd.</div>
-                        <h3 class="font-bold text-dark-slate-grey truncate">Durable Polyester Fabric - 200 Yard Roll</h3>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-lg font-bold text-dark-slate-grey">1800 EGP</span>
-                            <button class="text-dark-slate-grey text-sm font-bold border border-dark-slate-grey px-3 py-1 rounded hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Add</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Product Grid -->
-
-            <!-- See More Button -->
-            <div class="mt-12 text-center">
-                <button class="bg-gradient-custom px-8 py-3 text-old-lace rounded-full font-bold hover:opacity-90 transition-opacity shadow-md">See More Products</button>
-            </div>
+            </a>
 
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark-slate-grey-2 text-old-lace py-8" id="contact">
-        <div class="container mx-auto px-4 text-center md:text-left">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <!-- Logo - DOT REMOVED HERE -->
-                <div class="mb-4 md:mb-0">
-                    <a href="#"><img src="attachements/logoWhite.png" alt="" style="width: 150px;"></a>
-                    <p class="text-old-lace/70 text-sm">Connecting the clothing industry.</p>
-                </div>
-                <div class="flex gap-6 text-sm text-old-lace/80">
-                    <a href="#products" class="hover:text-old-lace">Shop</a>
-                    <a href="#" class="hover:text-old-lace">About</a>
-                    <a href="#contact" class="hover:text-old-lace">Contact</a>
+    <!-- Collabs / Brands -->
+    <section class="py-12 border-t border-b border-dark-slate-grey/10">
+        <div class="container mx-auto px-4 text-center">
+            <h4 class="text-sm uppercase tracking-widest text-dark-slate-grey/60 mb-8">Trusted by Top Brands & Factories</h4>
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Using FontAwesome icons as placeholders for logos -->
+                <i class="fa-brands fa-pied-piper text-5xl hover:text-dark-slate-grey"></i>
+                <i class="fa-brands fa-connectdevelop text-5xl hover:text-dark-slate-grey"></i>
+                <i class="fa-brands fa-codepen text-5xl hover:text-dark-slate-grey"></i>
+                <i class="fa-brands fa-aviato text-5xl hover:text-dark-slate-grey"></i>
+                <i class="fa-brands fa-d-and-d text-5xl hover:text-dark-slate-grey"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs & Trust Signals -->
+    <section class="py-20 bg-old-lace-2">
+        <div class="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <!-- FAQs -->
+            <div>
+                <h2 class="text-3xl font-serif font-bold text-dark-slate-grey mb-6">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="border-b border-dark-slate-grey/10 pb-4">
+                        <details class="group">
+                            <summary class="flex justify-between items-center cursor-pointer font-bold text-dark-slate-grey list-none">
+                                <span>How do I order in bulk?</span>
+                                <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                            </summary>
+                            <div class="text-dark-slate-grey/70 mt-3 text-sm leading-relaxed">
+                                Simply navigate to the 'Fabrics' or 'Wholesale' section, select your desired material and quantity, and proceed to checkout. For orders over 500 units, please contact our support for special rates.
+                            </div>
+                        </details>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="border-b border-dark-slate-grey/10 pb-4">
+                        <details class="group">
+                            <summary class="flex justify-between items-center cursor-pointer font-bold text-dark-slate-grey list-none">
+                                <span>What payment methods are accepted?</span>
+                                <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                            </summary>
+                            <div class="text-dark-slate-grey/70 mt-3 text-sm leading-relaxed">
+                                We accept Visa, MasterCard, Fawry, and Cash on Delivery (for orders under 5000 EGP). Secure online payments are processed via our banking partners.
+                            </div>
+                        </details>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="border-b border-dark-slate-grey/10 pb-4">
+                        <details class="group">
+                            <summary class="flex justify-between items-center cursor-pointer font-bold text-dark-slate-grey list-none">
+                                <span>Do you offer international shipping?</span>
+                                <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                            </summary>
+                            <div class="text-dark-slate-grey/70 mt-3 text-sm leading-relaxed">
+                                Currently, we ship throughout Egypt. International shipping to select countries in the MENA region will be available starting next quarter.
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
-            <div class="border-t border-dark-slate-grey mt-8 pt-8 text-center text-sm text-old-lace/50">
-                &copy; 2025 Clothify. All rights reserved.
+
+            <!-- Trust Features (Information about us) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Feature 1 -->
+                <div class="bg-old-lace p-6 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <div class="text-dark-slate-grey text-2xl mb-4"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Same-Day Delivery</h3>
+                    <p class="text-sm text-dark-slate-grey/60">Order before 1 PM for delivery within Cairo & Giza.</p>
+                </div>
+                 <!-- Feature 2 -->
+                 <div class="bg-old-lace p-6 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <div class="text-dark-slate-grey text-2xl mb-4"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Secure Payment</h3>
+                    <p class="text-sm text-dark-slate-grey/60">Your data is protected with 256-bit SSL encryption.</p>
+                </div>
+                 <!-- Feature 3 -->
+                 <div class="bg-old-lace p-6 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <div class="text-dark-slate-grey text-2xl mb-4"><i class="fa-solid fa-medal"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Premium Quality</h3>
+                    <p class="text-sm text-dark-slate-grey/60">Verified factories and high-grade materials only.</p>
+                </div>
+                 <!-- Feature 4 -->
+                 <div class="bg-old-lace p-6 rounded-lg shadow-sm border border-dark-slate-grey/5">
+                    <div class="text-dark-slate-grey text-2xl mb-4"><i class="fa-solid fa-headset"></i></div>
+                    <h3 class="font-bold text-lg mb-2">24/7 Support</h3>
+                    <p class="text-sm text-dark-slate-grey/60">Our customer care team is always here to help you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-dark-slate-grey text-old-lace pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                
+                <!-- Brand Info -->
+                <div class="col-span-1 md:col-span-1">
+                     <a href="#" class="inline-block mb-6">
+                         <img src="attachements/logoWhite.png" alt="Clothify" class="w-40 opacity-90">
+                     </a>
+                     <p class="text-old-lace/70 text-sm leading-relaxed mb-6">
+                         Revolutionizing the clothing industry by connecting factories, suppliers, and customers in one seamless ecosystem.
+                     </p>
+                     <div class="flex gap-4">
+                         <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                         <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                         <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                         <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                     </div>
+                </div>
+
+                <!-- Quick Shops -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Quick Shop</h4>
+                    <ul class="space-y-3 text-old-lace/70 text-sm">
+                        <li><a href="#" class="hover:text-old-lace transition-colors">New Arrivals</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Best Sellers</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Men's Collection</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Women's Collection</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Fabrics & Materials</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Care -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Customer Care</h4>
+                    <ul class="space-y-3 text-old-lace/70 text-sm">
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Shipping Policy</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Returns & Exchanges</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-old-lace transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Stay in the Loop</h4>
+                    <p class="text-old-lace/70 text-sm mb-4">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                    <form class="flex flex-col gap-2">
+                        <input type="email" placeholder="Enter your email" class="bg-white/10 border border-white/20 text-old-lace px-4 py-3 rounded focus:outline-none focus:border-old-lace placeholder-old-lace/40">
+                        <button class="bg-old-lace text-dark-slate-grey font-bold px-4 py-3 rounded hover:bg-white transition-colors">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-old-lace/50">
+                <p>&copy; 2025 Clothify. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <i class="fa-brands fa-cc-visa text-2xl"></i>
+                    <i class="fa-brands fa-cc-mastercard text-2xl"></i>
+                    <i class="fa-brands fa-cc-paypal text-2xl"></i>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Simple JS for Mobile Menu - KEPT -->
+    <!-- Mobile Menu Script -->
     <script>
-        // Event listener to toggle the mobile navigation menu
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Placeholder event listeners to prevent console errors if a user interacts with the empty fields
-        document.getElementById('search-input').addEventListener('input', () => console.log('Search input changed (No filtering logic enabled).'));
-        document.getElementById('category-filter').addEventListener('change', () => console.log('Category changed (No filtering logic enabled).'));
-        document.getElementById('price-range').addEventListener('input', (e) => {
-            document.getElementById('price-label').textContent = `Max Price: ${e.target.value} EGP`;
-            console.log('Price range changed (No filtering logic enabled).');
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
         });
     </script>
 </body>
