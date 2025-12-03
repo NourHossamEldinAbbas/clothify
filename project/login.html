@@ -42,39 +42,6 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-
-        /* Custom style for the subtle Google G icon */
-        .google-icon {
-            /* Create a G shape using colored borders on a parent element */
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            border-style: solid;
-            border-width: 2px;
-            border-color: transparent;
-            position: relative;
-        }
-
-        .google-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            /* Use a conic gradient or layered borders for the colors */
-            background: conic-gradient(
-                from 0deg, 
-                var(--tw-google-red) 0% 25%, 
-                var(--tw-google-blue) 25% 50%, 
-                var(--tw-google-green) 50% 75%, 
-                var(--tw-google-yellow) 75% 100%
-            );
-            /* Mask to make it look like a G stroke */
-            -webkit-mask: radial-gradient(circle at center, transparent 35%, black 40%);
-            mask: radial-gradient(circle at center, transparent 35%, black 40%);
-        }
     </style>
 </head>
 <body class="bg-old-lace text-dark-slate-grey min-h-screen flex flex-col">
@@ -95,7 +62,16 @@
                 class="w-full mb-6 bg-old-lace-2 text-dark-slate-grey border border-dark-slate-grey/20 px-4 py-3 rounded-lg text-lg font-bold hover:bg-old-lace-2 transition-colors shadow-md flex items-center justify-center gap-3"
             >
                 <div class="google-icon"></div>
-                Sign in with Google
+               <img src="attachements/google.png" alt="google-icon" style="width: auto; height: 27px;"> Continue with Google
+            </button>
+
+            <!-- Apple Sign-In Button (Primary Placement) -->
+            <button
+                type="button" 
+                class="w-full mb-6 bg-black text-white border border-dark-slate-grey/20 px-4 py-3 rounded-lg text-lg font-bold  shadow-md flex items-center justify-center gap-3"
+            >
+                <div class="google-icon"></div>
+               <img src="attachements/apple-white.png" alt="apple-icon" style="width: auto; height: 27px;"> Continue with Apple
             </button>
 
             <!-- Separator -->
