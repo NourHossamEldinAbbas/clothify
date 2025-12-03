@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clothify - Shopping cart</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Configure Custom Colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "dark-slate-grey": "#1E4447",
+              "dark-slate-grey-2": "#294340",
+              "old-lace": "#F8F1E1",
+              "old-lace-2": "#F6F0E3",
+              "old-lace-3": "#F7F0E0",
+            },
+            backgroundImage: {
+              "gradient-custom": "linear-gradient(90deg, #1E4447, #294340)",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap");
+
+      /* Hide scrollbar for horizontal scrolling areas */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="bg-old-lace text-dark-slate-grey font-sans antialiased">
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full z-50 bg-old-lace/95 backdrop-blur-sm border-b border-dark-slate-grey/10 transition-all duration-300"
+      id="navbar"
+    >
+      <div
+        class="container mx-auto px-4 h-20 flex items-center justify-between"
+      >
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="lg:hidden text-2xl text-dark-slate-grey"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Logo -->
+        <a href="../index.html" class="flex items-center gap-2">
+          <!-- Using the uploaded logo file if available, otherwise text fallback -->
+          <img
+            src="attachements/logo.png"
+            alt="Clothify"
+            class="h-20 w-auto object-contain"
+          />
+        </a>
+
+        <!-- Icons -->
+        <div class="flex items-center gap-5 text-lg">
+          <button
+            class="hover:text-dark-slate-grey/70 transition-colors hidden sm:block"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <a
+            href="login.html"
+            class="hover:text-dark-slate-grey/70 transition-colors"
+            ><i class="fa-regular fa-user"></i
+          ></a>
+          <button
+            class="hover:text-dark-slate-grey/70 transition-colors relative"
+          >
+            <i class="fa-solid fa-bag-shopping"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (Hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden absolute top-20 left-0 w-full bg-old-lace border-b border-dark-slate-grey/10 shadow-lg lg:hidden"
+      >
+        <div class="flex flex-col p-4 space-y-4 font-medium">
+          <a href="#new-arrivals" class="block">New Arrivals</a>
+          <a href="#sale" class="block text-red-600">Sale</a>
+          <a href="#collections" class="block">Collections</a>
+          <a href="#fabrics" class="block">Fabrics</a>
+          <hr class="border-dark-slate-grey/10" />
+          <a href="project/login.html" class="block">Sign In / Register</a>
+        </div>
+      </div>
+    </nav>
+    <main
+      class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex justify-center items-center min-h-[70vh]"
+    >
+      <!-- Empty Cart Content -->
+      <div
+        class="bg-white p-12 sm:p-16 rounded-3xl shadow-2xl border-2 border-dark-slate-grey/10 w-full max-w-lg text-center transform hover:scale-[1.01] transition-transform duration-300"
+      >
+        <div class="text-dark-slate-grey-2/80 mb-6">
+          <!-- Shopping Bag Icon with subtle background -->
+          <i
+            class="fa-solid fa-bag-shopping text-7xl mb-4 p-4 rounded-full bg-old-lace-2 inline-block shadow-inner"
+          ></i>
+        </div>
+
+        <h2 class="text-3xl font-serif font-bold mb-4 text-dark-slate-grey-2">
+          Your Cart is Empty!
+        </h2>
+
+        <p class="text-lg text-dark-slate-grey/70 mb-8">
+          It looks like you haven't added any items yet. Start filling your cart
+          with premium professional wear.
+        </p>
+
+        <a
+          href="../index.html"
+          class="inline-block bg-gradient-custom text-old-lace px-10 py-3 rounded-lg text-lg font-bold hover:opacity-90 transition-opacity shadow-lg"
+        >
+          Start Shopping Now
+        </a>
+      </div>
+    </main>
+  </body>
+</html>
