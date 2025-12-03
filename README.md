@@ -1,4 +1,4 @@
-![clothifyLogo](project/attachements/banner.jpg)
+![[project/attachements/banner.jpg]]
 
 Clothify is a web platform built to connect fabric suppliers, factories, workshops, and shops in one organized system.
 
