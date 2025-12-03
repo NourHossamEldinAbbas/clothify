@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clothify - Shopping cart</title>
 
+    <link rel="icon" type="image/x-icon" href="attachements/favicon.ico">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome -->
@@ -81,18 +82,24 @@
           <button
             class="hover:text-dark-slate-grey/70 transition-colors hidden sm:block"
           >
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <a
+            href="Searching.html"
+            class="hover:text-dark-slate-grey/70 transition-colors"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></a>
           </button>
           <a
             href="login.html"
             class="hover:text-dark-slate-grey/70 transition-colors"
             ><i class="fa-regular fa-user"></i
           ></a>
-          <button
-            class="hover:text-dark-slate-grey/70 transition-colors relative"
-          >
-            <i class="fa-solid fa-bag-shopping"></i>
-          </button>
+         <button class="hover:text-dark-slate-grey/70 transition-colors relative">
+          <a
+            href="shoppingCart.html"
+            class="hover:text-dark-slate-grey/70 transition-colors"
+            ><i class="fa-solid fa-bag-shopping"></i
+          ></a>
+                </button>
         </div>
       </div>
 
@@ -142,5 +149,161 @@
         </a>
       </div>
     </main>
+     <!-- Enhanced Footer -->
+    <footer class="bg-dark-slate-grey text-old-lace pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Brand Info -->
+          <div class="col-span-1 md:col-span-1 md:row-span-2">
+            <a href="#" class="inline-block mb-6">
+              <img
+                src="attachements/logoWhite.png"
+                alt="Clothify"
+                class="m-0 pr-5 h-30 w-auto opacity-90"
+              />
+            </a>
+            <p class="text-old-lace/70 text-sm leading-relaxed mb-6">
+              Revolutionizing the clothing industry by connecting factories,
+              suppliers, and customers in one seamless ecosystem.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-twitter"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Quick Shops -->
+          <div>
+            <h4 class="font-bold text-lg mb-6">Quick Shop</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >NEW ARRIVALS</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >BEST SELLERS</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >MEN'S COLLECTION</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >WOMEN'S COLLECTION</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >FABRICS & MATERIALS</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Customer Care -->
+          <div>
+            <h4 class="font-bold text-lg mb-6">Customer Care</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >CONTACT US</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >SHIPPING POLICY</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >RETURNS & EXCHANGES</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >PRIVACY POLICY</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >TERMS OF SERVICE</a
+                >
+              </li>
+            </ul>
+          </div>
+                    <!-- Payments -->
+          <div>
+            <h4 class="font-bold text-lg mb-6">Payments and Invoices</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >PAYMENT METHODS</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >PAYMENT SECURITY</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >INVOICES</a
+                >
+              </li>
+            </ul>
+          </div>
+                            <!-- Quick access to account --> 
+          <div>
+            <h4 class="font-bold text-lg mb-6">My Clothify Account</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >REGISTRATIONS AND LOG IN</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >MY FAVORITES</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Bar: Copyright Text & Payment Icons (Updated as requested) -->
+        <div
+          class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-old-lace/50"
+        >
+          <p>&copy; 2025 Clothify. All rights reserved.</p>
+          <div class="flex gap-4 mt-4 md:mt-0">
+            <i class="fa-brands fa-cc-visa text-2xl"></i>
+            <i class="fa-brands fa-cc-mastercard text-2xl"></i>
+            <i class="fa-brands fa-cc-paypal text-2xl"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

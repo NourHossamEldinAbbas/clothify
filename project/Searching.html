@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clothify - Search</title>
+
+    <link rel="icon" type="image/x-icon" href="attachements/favicon.ico">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Configure Custom Colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "dark-slate-grey": "#1E4447",
+              "dark-slate-grey-2": "#294340",
+              "old-lace": "#F8F1E1",
+              "old-lace-2": "#F6F0E3",
+              "old-lace-3": "#F7F0E0",
+            },
+            backgroundImage: {
+              "gradient-custom": "linear-gradient(90deg, #1E4447, #294340)",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap");
+
+      /* Hide scrollbar for horizontal scrolling areas */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #F8F1E1;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #1E4447;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body class="bg-old-lace text-dark-slate-grey font-sans antialiased">
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full z-50 bg-old-lace/95 backdrop-blur-sm border-b border-dark-slate-grey/10 transition-all duration-300"
+      id="navbar"
+    >
+      <div
+        class="container mx-auto px-4 h-20 flex items-center justify-between"
+      >
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="lg:hidden text-2xl text-dark-slate-grey"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Logo -->
+        <a href="../index.html" class="flex items-center gap-2">
+          <!-- Using the uploaded logo file if available, otherwise text fallback -->
+          <img
+            src="attachements/logo.png"
+            alt="Clothify"
+            class="h-20 w-auto object-contain"
+          />
+        </a>
+
+        <!-- Icons -->
+        <div class="flex items-center gap-5 text-lg">
+          <button
+            class="hover:text-dark-slate-grey/70 transition-colors hidden sm:block"
+          >
+            <a
+            href="Searching.html"
+            class="hover:text-dark-slate-grey/70 transition-colors"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></a>
+          </button>
+          <a
+            href="login.html"
+            class="hover:text-dark-slate-grey/70 transition-colors"
+            ><i class="fa-regular fa-user"></i
+          ></a>
+         <button class="hover:text-dark-slate-grey/70 transition-colors relative">
+          <a
+            href="shoppingCart.html"
+            class="hover:text-dark-slate-grey/70 transition-colors"
+            ><i class="fa-solid fa-bag-shopping"></i
+          ></a>
+                </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (Hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden absolute top-20 left-0 w-full bg-old-lace border-b border-dark-slate-grey/10 shadow-lg lg:hidden"
+      >
+        <div class="flex flex-col p-4 space-y-4 font-medium">
+          <a href="#new-arrivals" class="block">New Arrivals</a>
+          <a href="#sale" class="block text-red-600">Sale</a>
+          <a href="#collections" class="block">Collections</a>
+          <a href="#fabrics" class="block">Fabrics</a>
+          <hr class="border-dark-slate-grey/10" />
+          <a href="project/login.html" class="block">Sign In / Register</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-32">
+      <!-- Enhanced Search Bar Section -->
+      <div class="mb-10">
+        <h2 class="text-4xl font-serif font-bold text-dark-slate-grey-2 mb-6">
+          <i class="fa-solid fa-magnifying-glass text-2xl mr-3 text-dark-slate-grey"></i> 
+          Find Your Perfect Match
+        </h2>
+        
+        <!-- Advanced Search Area -->
+        <div class="bg-white rounded-xl shadow-lg border border-dark-slate-grey/10 p-6">
+          <div class="flex flex-col lg:flex-row gap-4">
+            <!-- Main Search Input -->
+            <div class="flex-1 relative">
+              <input 
+                type="text" 
+                id="main-search"
+                placeholder="Search for products, fabrics, or factories..."
+                class="w-full px-6 py-4 pr-12 rounded-lg border-2 border-old-lace-2 focus:border-dark-slate-grey focus:ring-2 focus:ring-dark-slate-grey/20 transition-all text-lg"
+              />
+              <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-dark-slate-grey/40 text-xl"></i>
+            </div>
+            
+            <!-- Search Button -->
+            <button class="bg-gradient-custom text-old-lace px-8 py-4 rounded-lg text-lg font-bold hover:opacity-90 transition-opacity shadow-md whitespace-nowrap">
+              <i class="fa-solid fa-search mr-2"></i> Search
+            </button>
+          </div>
+
+          <!-- Quick Search Tags -->
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-sm text-dark-slate-grey/60 mr-2">Popular:</span>
+            <button class="px-3 py-1 bg-old-lace-2 rounded-full text-sm hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Cotton Fabric</button>
+            <button class="px-3 py-1 bg-old-lace-2 rounded-full text-sm hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Bulk Orders</button>
+            <button class="px-3 py-1 bg-old-lace-2 rounded-full text-sm hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Custom Tailoring</button>
+            <button class="px-3 py-1 bg-old-lace-2 rounded-full text-sm hover:bg-dark-slate-grey hover:text-old-lace transition-colors">Wedding Suits</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Summary -->
+      <div class="mb-6 flex items-center justify-between">
+        <p class="text-dark-slate-grey/70">
+          Showing results for <span class="font-semibold text-dark-slate-grey italic"></span>
+        </p>
+        <button class="lg:hidden bg-dark-slate-grey text-old-lace px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+          <i class="fa-solid fa-filter mr-2"></i> Filters
+        </button>
+      </div>
+
+      <!-- Main Content Grid: Filters and Controls -->
+      <div class="lg:grid lg:grid-cols-4 gap-8">
+        
+        <!-- Enhanced Filters Sidebar -->
+        <aside class="hidden lg:block lg:col-span-1 p-6 bg-white rounded-xl shadow-lg border border-dark-slate-grey/10 mb-8 lg:mb-0 h-fit sticky top-24 custom-scrollbar overflow-y-auto max-h-[80vh]">
+          <div class="flex justify-between items-center mb-4 border-b pb-3 border-old-lace-2">
+            <h3 class="text-xl font-bold">Refine Results</h3>
+            <button class="text-sm text-dark-slate-grey/60 hover:text-dark-slate-grey">
+              <i class="fa-solid fa-rotate-right mr-1"></i> Reset
+            </button>
+          </div>
+
+          <!-- Filter: Category -->
+          <div class="mb-6">
+            <label class="block text-md font-semibold mb-3">Category</label>
+            <select class="w-full p-3 border-2 border-old-lace-2 rounded-lg bg-old-lace-3 focus:ring-dark-slate-grey focus:border-dark-slate-grey transition-all cursor-pointer">
+              <option>All Categories</option>
+              <option selected>Formal Wear</option>
+              <option>Casual Wear</option>
+              <option>Sportswear</option>
+              <option>Traditional Wear</option>
+              <option>Accessories</option>
+              <option>Fabrics & Materials</option>
+            </select>
+          </div>
+
+          <!-- Filter: Price Range -->
+          <div class="mb-6">
+            <label class="block text-md font-semibold mb-3">Price Range</label>
+            <div class="flex gap-3 mb-2">
+              <input type="number" placeholder="Min" class="w-1/2 p-2 border-2 border-old-lace-2 rounded-lg bg-old-lace-3 focus:ring-dark-slate-grey focus:border-dark-slate-grey" value="50" />
+              <input type="number" placeholder="Max" class="w-1/2 p-2 border-2 border-old-lace-2 rounded-lg bg-old-lace-3 focus:ring-dark-slate-grey focus:border-dark-slate-grey" value="1000" />
+            </div>
+            <input type="range" min="50" max="1000" value="700" class="w-full h-2 bg-old-lace-2 rounded-lg appearance-none cursor-pointer">
+          </div>
+
+          <!-- Filter: Listing Type -->
+          <div class="mb-6">
+            <label class="block text-md font-semibold mb-3">Listing Type</label>
+            <div class="space-y-2">
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Products (Retail)</span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" checked class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Factories / Bulk Offers</span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Fabric Suppliers</span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Custom Tailors</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filter: Size -->
+          <div class="mb-6">
+            <label class="block text-md font-semibold mb-3">Size</label>
+            <div class="grid grid-cols-4 gap-2">
+              <button class="p-2 border-2 border-old-lace-2 rounded-lg hover:border-dark-slate-grey hover:bg-dark-slate-grey hover:text-old-lace transition-all text-sm font-semibold">XS</button>
+              <button class="p-2 border-2 border-old-lace-2 rounded-lg hover:border-dark-slate-grey hover:bg-dark-slate-grey hover:text-old-lace transition-all text-sm font-semibold">S</button>
+              <button class="p-2 border-2 border-dark-slate-grey bg-dark-slate-grey text-old-lace rounded-lg transition-all text-sm font-semibold">M</button>
+              <button class="p-2 border-2 border-old-lace-2 rounded-lg hover:border-dark-slate-grey hover:bg-dark-slate-grey hover:text-old-lace transition-all text-sm font-semibold">L</button>
+              <button class="p-2 border-2 border-old-lace-2 rounded-lg hover:border-dark-slate-grey hover:bg-dark-slate-grey hover:text-old-lace transition-all text-sm font-semibold">XL</button>
+              <button class="p-2 border-2 border-old-lace-2 rounded-lg hover:border-dark-slate-grey hover:bg-dark-slate-grey hover:text-old-lace transition-all text-sm font-semibold">2XL</button>
+              <button class="p-2 border-2 border-old-lace-2 rounded-lg hover:border-dark-slate-grey hover:bg-dark-slate-grey hover:text-old-lace transition-all text-sm font-semibold">3XL</button>
+            </div>
+          </div>
+          
+          <!-- Filter: Color Options -->
+          <div class="mb-6">
+            <label class="block text-md font-semibold mb-3">Color</label>
+            <div class="grid grid-cols-6 gap-3">
+              <button class="w-10 h-10 rounded-full border-2 border-dark-slate-grey shadow-md transition-all hover:scale-110" style="background-color: white;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: black;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #3B82F6;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #EF4444;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #10B981;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #F59E0B;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #8B5CF6;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #EC4899;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #6B7280;"></button>
+              <button class="w-10 h-10 rounded-full border-2 border-old-lace-2 shadow-md transition-all hover:scale-110 hover:border-dark-slate-grey" style="background-color: #92400E;"></button>
+            </div>
+          </div>
+
+          <!-- Filter: Material Type -->
+          <div class="mb-6">
+            <label class="block text-md font-semibold mb-3">Material</label>
+            <div class="space-y-2">
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" checked class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Cotton</span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Linen</span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Silk</span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Polyester</span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="checkbox" class="form-checkbox text-dark-slate-grey rounded focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3">Wool</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filter: Rating -->
+          <div class="mb-6">
+            <label class="block text-md font-semibold mb-3">Minimum Rating</label>
+            <div class="space-y-2">
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="radio" name="rating" class="form-radio text-dark-slate-grey focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3 flex items-center">
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                </span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="radio" name="rating" checked class="form-radio text-dark-slate-grey focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3 flex items-center">
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <span class="ml-1 text-sm">& up</span>
+                </span>
+              </label>
+              <label class="flex items-center p-2 rounded hover:bg-old-lace-3 cursor-pointer transition-colors">
+                <input type="radio" name="rating" class="form-radio text-dark-slate-grey focus:ring-dark-slate-grey w-5 h-5">
+                <span class="ml-3 flex items-center">
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <span class="ml-1 text-sm">& up</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Apply Button -->
+          <button class="w-full bg-gradient-custom text-old-lace px-4 py-3 rounded-lg text-lg font-bold hover:opacity-90 transition-opacity shadow-md mt-4">
+            <i class="fa-solid fa-check mr-2"></i> Apply Filters
+          </button>
+        </aside>
+
+        <!-- Controls Area -->
+        <div class="lg:col-span-3">
+          
+          <!-- Sort By & View Options -->
+          <div class="flex justify-between items-center mb-6 border-b border-old-lace-2 pb-3">
+            <div class="flex items-center space-x-4">
+              <span class="text-sm text-dark-slate-grey/70">0 Results</span>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-2">
+                <label for="sort-by" class="text-sm hidden sm:inline">Sort:</label>
+                <select id="sort-by" class="p-2 border-2 border-old-lace-2 rounded-lg bg-white text-sm focus:ring-dark-slate-grey focus:border-dark-slate-grey">
+                  <option>Relevance</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                  <option>Newest First</option>
+                  <option>Best Rated</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Placeholder for products -->
+          <div class="bg-old-lace-2 p-10 rounded-xl text-center border-2 border-dark-slate-grey/10 shadow-inner">
+            <i class="fa-solid fa-box-open text-5xl text-dark-slate-grey/20 mb-4"></i>
+            <p class="text-xl font-semibold text-dark-slate-grey/70">
+              Your search results will appear here
+            </p>
+            <p class="mt-2 text-dark-slate-grey/50">
+              Adjust filters and click "Apply Filters" to refine your search
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-slate-grey text-old-lace pt-16 pb-8 mt-20">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Brand Info -->
+          <div class="col-span-1 md:col-span-1 md:row-span-2">
+            <a href="#" class="inline-block mb-6">
+              <img
+                src="attachements/logoWhite.png"
+                alt="Clothify"
+                class="m-0 pr-5 h-30 w-auto opacity-90"
+              />
+            </a>
+            <p class="text-old-lace/70 text-sm leading-relaxed mb-6">
+              Revolutionizing the clothing industry by connecting factories,
+              suppliers, and customers in one seamless ecosystem.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-twitter"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Quick Shops -->
+          <div>
+            <h4 class="font-bold text-lg mb-6">Quick Shop</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >NEW ARRIVALS</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >BEST SELLERS</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >MEN'S COLLECTION</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >WOMEN'S COLLECTION</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >FABRICS & MATERIALS</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Customer Care -->
+          <div>
+            <h4 class="font-bold text-lg mb-6">Customer Care</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >CONTACT US</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >SHIPPING POLICY</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >RETURNS & EXCHANGES</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >PRIVACY POLICY</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >TERMS OF SERVICE</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Payments -->
+          <div>
+            <h4 class="font-bold text-lg mb-6">Payments and Invoices</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >PAYMENT METHODS</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >PAYMENT SECURITY</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >INVOICES</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Quick access to account --> 
+          <div>
+            <h4 class="font-bold text-lg mb-6">My Clothify Account</h4>
+            <ul class="space-y-3 text-old-lace/70 text-sm">
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >REGISTRATIONS AND LOG IN</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-old-lace transition-colors"
+                  >MY FAVORITES</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-old-lace/50"
+        >
+          <p>&copy; 2025 Clothify. All rights reserved.</p>
+          <div class="flex gap-4 mt-4 md:mt-0">
+            <i class="fa-brands fa-cc-visa text-2xl"></i>
+            <i class="fa-brands fa-cc-mastercard text-2xl"></i>
+            <i class="fa-brands fa-cc-paypal text-2xl"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
