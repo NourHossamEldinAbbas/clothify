@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clothify - Shopping cart</title>
-
+    <title>Clothify - Policies</title>
     <link rel="icon" type="image/x-icon" href="attachements/favicon.ico">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -71,7 +70,7 @@
         <a href="../index.html" class="flex items-center gap-2">
           <!-- Using the uploaded logo file if available, otherwise text fallback -->
           <img
-            src="attachements/logo.png"
+            src="/Github/repos/clothify/project/attachements/logo.png"
             alt="Clothify"
             class="h-20 w-auto object-contain"
           />
@@ -118,38 +117,77 @@
         </div>
       </div>
     </nav>
-    <main
-      class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex justify-center items-center min-h-[70vh]"
-    >
-      <!-- Empty Cart Content -->
-      <div
-        class="bg-white p-12 sm:p-16 rounded-3xl shadow-2xl border-2 border-dark-slate-grey/10 w-full max-w-lg text-center transform hover:scale-[1.01] transition-transform duration-300"
-      >
-        <div class="text-dark-slate-grey-2/80 mb-6">
-          <!-- Shopping Bag Icon with subtle background -->
-          <i
-            class="fa-solid fa-bag-shopping text-7xl mb-4 p-4 rounded-full bg-old-lace-2 inline-block shadow-inner"
-          ></i>
-        </div>
+<main class="pt-28 pb-20 px-4">
+  <div class="max-w-4xl mx-auto space-y-10">
 
-        <h2 class="text-3xl font-serif font-bold mb-4 text-dark-slate-grey-2">
-          Your Cart is Empty!
-        </h2>
+    <!-- CONTACT US -->
+    <section id="contact" class="bg-dark-slate-grey rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">Contact Us</h2>
+      <p class="text-sm mb-3 text-white">We’re here to help with anything you need.</p>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-white">
+        <li>Email: support@clothify.com</li>
+        <li>Phone: +20 100 000 0000</li>
+        <li>Instagram / Facebook: @clothify</li>
+        <li>Response time: 24–48 hours</li>
+      </ul>
+    </section>
 
-        <p class="text-lg text-dark-slate-grey/70 mb-8">
-          It looks like you haven't added any items yet. Start filling your cart
-          with premium professional wear.
-        </p>
+    <!-- SHIPPING POLICY -->
+    <section id="shipping" class="bg-dark-slate-grey rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">Shipping Policy</h2>
+      <p class="text-sm mb-3 text-white">Fast, reliable delivery for all orders.</p>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-white">
+        <li>Processing time: 1–2 business days.</li>
+        <li>Local shipping: 2–5 business days.</li>
+        <li>International shipping: 7–14 business days.</li>
+        <li>Tracking number provided for all orders.</li>
+        <li>Delays may occur due to customs or peak seasons.</li>
+      </ul>
+    </section>
 
-        <a
-          href="../index.html"
-          class="inline-block bg-gradient-custom text-old-lace px-10 py-3 rounded-lg text-lg font-bold hover:opacity-90 transition-opacity shadow-lg"
-        >
-          Start Shopping Now
-        </a>
-      </div>
-    </main>
-     <!-- Enhanced Footer -->
+    <!-- RETURNS & EXCHANGES -->
+    <section id="returns" class="bg-dark-slate-grey rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">Returns & Exchanges</h2>
+      <p class="text-sm mb-3 text-white">Hassle-free returns for your peace of mind.</p>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-white">
+        <li>Returns accepted within 14 days of delivery.</li>
+        <li>Items must be unused and in original packaging.</li>
+        <li>Customer covers return shipping unless item is defective.</li>
+        <li>Exchanges processed within 3–5 business days.</li>
+        <li>Refunds issued to the original payment method.</li>
+      </ul>
+    </section>
+
+    <!-- PRIVACY POLICY -->
+    <section id="privacy" class="bg-dark-slate-grey rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">Privacy Policy</h2>
+      <p class="text-sm mb-3 text-white">We respect your privacy and protect your data.</p>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-white">
+        <li>We only collect info needed to process orders.</li>
+        <li>Payment data is handled securely by third-party processors.</li>
+        <li>We do not sell your personal data.</li>
+        <li>You may receive promotional emails (optional).</li>
+        <li>Data is stored securely with limited access.</li>
+      </ul>
+    </section>
+
+    <!-- TERMS OF SERVICE -->
+    <section id="terms" class="bg-dark-slate-grey rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">Terms of Service</h2>
+      <p class="text-sm mb-3 text-white">By using Clothify, you agree to the following terms:</p>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-white">
+        <li>All purchases are subject to product availability.</li>
+        <li>Prices may change without prior notice.</li>
+        <li>Orders may be canceled due to invalid info or fraud risk.</li>
+        <li>You agree not to misuse or attempt to harm the platform.</li>
+        <li>We reserve the right to update these terms at any time.</li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+                        <!-- Footer -->
     <footer class="bg-dark-slate-grey text-old-lace pt-16 pb-8">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -227,27 +265,27 @@
             <h4 class="font-bold text-lg mb-6">Customer Care</h4>
             <ul class="space-y-3 text-old-lace/70 text-sm">
               <li>
-                <a href="policies.html" class="hover:text-old-lace transition-colors"
+                <a href="#contact" class="hover:text-old-lace transition-colors"
                   >CONTACT US</a
                 >
               </li>
               <li>
-                <a href="policies.html"  class="hover:text-old-lace transition-colors"
+                <a href="#shipping" class="hover:text-old-lace transition-colors"
                   >SHIPPING POLICY</a
                 >
               </li>
               <li>
-                <a href="policies.html" class="hover:text-old-lace transition-colors"
+                <a href="#returns" class="hover:text-old-lace transition-colors"
                   >RETURNS & EXCHANGES</a
                 >
               </li>
               <li>
-                <a href="policies.html" class="hover:text-old-lace transition-colors"
+                <a href="#privacy" class="hover:text-old-lace transition-colors"
                   >PRIVACY POLICY</a
                 >
               </li>
               <li>
-                <a href="policies.html" class="hover:text-old-lace transition-colors"
+                <a href="#terms" class="hover:text-old-lace transition-colors"
                   >TERMS OF SERVICE</a
                 >
               </li>
@@ -268,5 +306,7 @@
         </div>
       </div>
     </footer>
+  </body>
+</html>
   </body>
 </html>
