@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothify - Product Details</title>
+    <link rel="icon" type="image/x-icon" href="attachements/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="components.js"></script>
+    <script src="data.js"></script>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "dark-slate-grey": "#1E4447",
+              "old-lace": "#F8F1E1",
+              "old-lace-2": "#F6F0E3",
+              "old-lace-3": "#F7F0E0",
+            },
+            backgroundImage: {
+              "gradient-custom": "linear-gradient(90deg, #1E4447, #294340)",
+              "gradient-custom-light": "linear-gradient(90deg, #294, #294)",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+</head>
+<body class="bg-old-lace text-dark-slate-grey font-sans antialiased flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="container mx-auto px-4 py-10 flex-grow">
+        <div id="product-container" class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="col-span-2 text-center py-20">
+                <i class="fa-solid fa-spinner fa-spin text-4xl text-dark-slate-grey"></i>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Get Product ID from URL (e.g., productPage.html?id=2)
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id') || 4; // Default to 1
+
+        const product = getProductById(productId);
+        const about = getAboutThisItem(productId); 
+     
+        const container = document.getElementById('product-container');
+
+        if (product) {
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border border-dark-slate-grey/10 relative">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                        ${product.sale_price ? `<div class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 font-bold rounded">-Sale</div>` : ''}
+                    </div>
+                </div>
+                
+
+                <div class="flex flex-col justify-center">
+                    <div class="mb-2 text-sm text-dark-slate-grey/60 font-bold uppercase tracking-widest">
+                        ${product.category} / ${product.material}
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl font-serif font-bold text-dark-slate-grey mb-4">
+                        ${product.name}
+                    </h1>
+
+                    <div class="flex items-center gap-4 mb-6 text-xl">
+                        ${product.sale_price 
+                            ? `<span class="font-bold text-red-600">${product.sale_price} EGP</span>
+                               <span class="line-through text-dark-slate-grey/40">${product.price} EGP</span>`
+                            : `<span class="font-bold text-dark-slate-grey">${product.price} EGP</span>`
+                        }
+                    </div>
+
+                    <p class="text-dark-slate-grey/80 leading-relaxed mb-8">
+                        ${product.description}
+                    </p>
+
+                    <div class="bg-white p-4 rounded-lg border border-dark-slate-grey/10 mb-8 flex items-center gap-4 shadow-sm">
+                        <div class=items-center justify-center text-dark-slate-grey text-xl">
+                        </div>
+                            ${about}
+                    </div>
+
+                      <div class="bg-white p-4 rounded-lg border border-dark-slate-grey/10 mb-8 flex items-center gap-4 shadow-sm">
+                        <div class="w-12 h-12 bg-old-lace rounded-full flex items-center justify-center text-dark-slate-grey text-xl">
+                            <i class="fa-solid fa-industry"></i>
+                        </div>
+                        
+
+                        <div>
+                            <p class="text-xs text-dark-slate-grey/60 uppercase font-bold">Sold & Shipped By</p>
+                            <p class="font-bold text-lg">${product.factory_name}</p>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="flex flex-col gap-4">
+                        <button class="flex-1 bg-gradient-custom text-old-lace py-4 rounded-lg font-bold shadow-lg hover:opacity-90 transition-opacity">
+                            Add to Cart
+                        </button>
+                         <button class="flex-1 bg-gradient-custom-light text-old-lace py-4 rounded-lg font-bold shadow-lg hover:opacity-90 transition-opacity">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `<div class="col-span-2 text-center text-red-500 font-bold">Product not found.</div>`;
+        }
+    </script>
+</body>
+</html>
