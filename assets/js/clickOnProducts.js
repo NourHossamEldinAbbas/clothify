@@ -16,7 +16,7 @@ document.addEventListener("click", (e) => {
     const card = e.target.closest(".product-card");
     const productId = card.getAttribute("data-product-id");
 
-    window.location.href = `/Github/repos/clothify/pages/productPage.html?id=${productId}`;
+    window.location.href = `pages/productPage.html?id=${productId}`;
   }
 
 });
