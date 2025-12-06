@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clothify - Shopping cart</title>
 
-    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico" />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome -->
@@ -58,10 +58,12 @@
     <main
       class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex justify-center items-center min-h-[70vh]"
     >
-    
+      <div id="cart-container" class="hidden w-full">
+        <!-- JS will fill cart items here -->
+      </div>
       <!-- Empty Cart Content -->
       <div
-        class="bg-white p-12 sm:p-16 rounded-3xl shadow-2xl border-2 border-dark-slate-grey/10 w-full max-w-lg text-center transform hover:scale-[1.01] transition-transform duration-300"
+       id="empty-cart" class="bg-white p-12 sm:p-16 rounded-3xl shadow-2xl border-2 border-dark-slate-grey/10 w-full max-w-lg text-center transform hover:scale-[1.01] transition-transform duration-300"
       >
         <div class="text-dark-slate-grey-2/80 mb-6">
           <!-- Shopping Bag Icon with subtle background -->
@@ -87,7 +89,7 @@
         </a>
       </div>
     </main>
-     <!-- Footer -->
+    <!-- Footer -->
     <div id="footer-placeholder"></div>
   </body>
 </html>
