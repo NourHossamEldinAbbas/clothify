@@ -20,7 +20,7 @@ function loadNavbar() {
         <a href="../index.html" class="flex items-center gap-2">
           <!-- Using the uploaded logo file if available, otherwise text fallback -->
           <img
-            src="attachements/logo.png"
+            src="../assets/images/logo.png"
             alt="Clothify"
             class="h-20 w-auto object-contain"
           />
@@ -82,7 +82,7 @@ function loadFooter() {
           <div class="col-span-1 md:col-span-1 md:row-span-2">
             <a href="../index.html" class="inline-block mb-6">
               <img
-                src="attachements/logoWhite.png"
+                src="../assets/images/logoWhite.png"
                 alt="Clothify"
                 class="m-0 pr-5 h-30 w-auto opacity-90"
               />
