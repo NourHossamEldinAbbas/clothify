@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <button 
           data-index="${index}" 
-          class="delete-item text-red-600 text-xl"
+          class="delete-item text-red-600 text-xl hover:text-red-800"
         >
           <i class="fa-solid fa-trash"></i>
         </button>
@@ -67,6 +67,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Update cart count
+      const currentCount = parseInt(localStorage.getItem("cartCount")) || 0;
+      if (currentCount > 0) {
+        localStorage.setItem("cartCount", currentCount - 1);
+        const numberOfProductsElement = document.querySelector(".numberOfProducts");
+        if (numberOfProductsElement) {
+          numberOfProductsElement.textContent = currentCount - 1;
+        }
+      }
+
       location.reload();
     });
   });

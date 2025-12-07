@@ -7,6 +7,15 @@ function initializeCartCount() {
   }
 }
 
+// Reset cart count
+function resetCartCount() {
+  localStorage.setItem("cartCount", "0");
+  const numberOfProductsElement = document.querySelector(".numberOfProducts");
+  if (numberOfProductsElement) {
+    numberOfProductsElement.textContent = "0";
+  }
+}
+
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", initializeCartCount);
 
@@ -18,7 +27,6 @@ document.addEventListener("click", (e) => {
     const numberOfProductsElement = document.querySelector(".numberOfProducts");
     let currentCount = parseInt(numberOfProductsElement.textContent) || 0;
     currentCount += 1;
-    
     numberOfProductsElement.textContent = currentCount;
     
     // Save to localStorage
@@ -43,8 +51,8 @@ document.addEventListener("click", (e) => {
     const productId = card.getAttribute("data-product-id");
 
     window.location.href = `pages/productPage.html?id=${productId}`;
+    resetCartCount();
   }
-
 });
 
 // Add product to cart with full details

@@ -60,7 +60,7 @@
     <script>
       // Get Product ID from URL (e.g., productPage.html?id=2)
       const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get("id") || 4; // Default to 1
+      const productId = urlParams.get("id") || 4;
 
       const product = getProductById(productId);
       const about = getAboutThisItem(productId);
@@ -106,7 +106,7 @@
                     </p>
 
                     <div class="bg-white p-4 rounded-lg border border-dark-slate-grey/10 mb-8 flex items-center gap-4 shadow-sm">
-                        <div class=items-center justify-center text-dark-slate-grey text-xl">
+                        <div class=items-center justify-center text-dark-slate-grey text-xl>
                         </div>
                             ${about}
                     </div>
@@ -128,7 +128,7 @@
                     
 
                     <div class="flex flex-col gap-4">
-                        <button class="add-to-cart-btn flex-1 bg-gradient-custom text-old-lace py-4 rounded-lg font-bold shadow-lg hover:opacity-90 transition-opacity">
+                        <button id="add-to-cart-product-page" class="flex-1 bg-gradient-custom text-old-lace py-4 rounded-lg font-bold shadow-lg hover:opacity-90 transition-opacity">
                             Add to Cart
                         </button>
                         <button class="flex-1 bg-gradient-custom-light text-old-lace py-4 rounded-lg font-bold shadow-lg hover:opacity-90 transition-opacity">
@@ -137,6 +137,20 @@
                     </div>
                 </div>
             `;
+
+        // Add event listener to the "Add to Cart" button
+        const addToCartBtn = document.getElementById("add-to-cart-product-page");
+        if (addToCartBtn) {
+          addToCartBtn.addEventListener("click", () => {
+            const numberOfProductsElement = document.querySelector(".numberOfProducts");
+            let currentCount = parseInt(numberOfProductsElement.textContent) || 0;
+            currentCount += 1;
+            numberOfProductsElement.textContent = currentCount;
+            localStorage.setItem("cartCount", currentCount);
+            addToCart(product);
+            alert("Product added to cart!");
+          });
+        }
       } else {
         container.innerHTML = `<div class="col-span-2 text-center text-red-500 font-bold">Product not found.</div>`;
       }
