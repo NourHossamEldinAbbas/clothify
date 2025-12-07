@@ -46,8 +46,10 @@ function loadNavbar() {
           <a
             href="shoppingCart.html"
             class="hover:text-dark-slate-grey/70 transition-colors"
-            ><i class="fa-solid fa-bag-shopping"></i
-          ></a>
+            ><i class="fa-solid fa-bag-shopping relative flex gap-2">
+            <p class="numberOfProducts text-sm"></p></i
+          >
+          </a>
                 </button>
         </div>
       </div>
