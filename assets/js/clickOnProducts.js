@@ -51,7 +51,6 @@ document.addEventListener("click", (e) => {
     const productId = card.getAttribute("data-product-id");
 
     window.location.href = `pages/productPage.html?id=${productId}`;
-    resetCartCount();
   }
 });
 
