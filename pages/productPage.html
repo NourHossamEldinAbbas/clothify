@@ -277,7 +277,21 @@
           });
         }
       } else {
-        container.innerHTML = `<div class="col-span-2 text-center text-red-500 font-bold">Product not found.</div>`;
+        container.innerHTML = `
+        <div class="col-span-2 text-center py-30">
+          <i class="fa-solid text-9xl text-bg-gradient-custom mb-6">404</i>
+          <div class="col-span-2 text-center text-3xl font-bold">Oops! That page can't be found.</div>
+          <div class="col-span-2 text-center text-black/60 text-lg font-bold">Looks like this page does not exist or missing. Maybe try a search? </div>
+          <div class="col-span-2 text-center mt-6 gap-10 flex justify-center">
+        <button onclick="window.location.href='../index.html'" class="mt-4 bg-gradient-custom text-old-lace px-6 py-2 rounded-lg font-bold hover:opacity-90 transition-opacity shadow-lg">
+            Back to Home
+          </button>
+          <button onclick="window.history.back()" class="mt-4 bg-gradient-custom text-old-lace px-6 py-2 rounded-lg font-bold hover:opacity-90 transition-opacity shadow-lg">
+            Go Back
+          </button>
+          </div>
+        </div>
+        `;
       }
     </script>
   </body>
