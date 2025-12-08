@@ -40,18 +40,41 @@
         },
       };
     </script>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap");
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap");
 
-      /* Hide scrollbar for horizontal scrolling areas */
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-    </style>
+  /* Hide scrollbar for horizontal scrolling areas */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Mobile menu scrollbar */
+  #mobile-menu {
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+
+  #mobile-menu::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #mobile-menu::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #mobile-menu::-webkit-scrollbar-thumb {
+    background: #1E4447;
+    border-radius: 3px;
+  }
+
+  #mobile-menu::-webkit-scrollbar-thumb:hover {
+    background: #294340;
+  }
+</style>
   </head>
   <body class="bg-old-lace text-dark-slate-grey font-sans antialiased">
     <!-- Navigation -->
@@ -65,7 +88,7 @@
         <!-- Mobile Menu Button -->
         <button
           id="mobile-menu-btn"
-          class="lg:hidden text-2xl text-dark-slate-grey"
+          class="md:hidden text-2xl text-dark-slate-grey hover:text-dark-slate-grey/70 transition-colors"
         >
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -81,9 +104,9 @@
         </a>
 
         <!-- Icons -->
-        <div class="flex items-center gap-5 text-lg">
+        <div class="flex items-center gap-8 text-xl">
           <button
-            class="hover:text-dark-slate-grey/70 transition-colors hidden sm:block"
+            class="hover:text-dark-slate-grey/70 transition-colors"
           >
             <a
               href="pages/searching.html"
@@ -112,17 +135,199 @@
       <!-- Mobile Menu (Hidden by default) -->
       <div
         id="mobile-menu"
-        class="hidden absolute top-20 left-0 w-full bg-old-lace border-b border-dark-slate-grey/10 shadow-lg lg:hidden"
+        class="hidden absolute top-20 left-0 w-full bg-old-lace border-b border-dark-slate-grey/10 shadow-lg"
       >
-        <div class="flex flex-col p-4 space-y-4 font-medium">
-          <a href="#new-arrivals" class="block">New Arrivals</a>
-          <a href="#sale" class="block text-red-600">Sale</a>
-          <a href="#collections" class="block">Collections</a>
-          <a href="#fabrics" class="block">Fabrics</a>
-          <hr class="border-dark-slate-grey/10" />
-          <a href="pages/login.html" class="block">Sign In / Register</a>
-        </div>
-      </div>
+           <el-tab-group class="mt-2 block">
+            <div class="border-b border-gray-200">
+              <el-tab-list class="-mb-px flex space-x-8 px-4">
+                <button class="flex-1 border-b-2 border-transparent px-1 py-4 text-base font-medium whitespace-nowrap text-gray-900 aria-selected:border-indigo-600 aria-selected:text-indigo-600">Women</button>
+                <button class="flex-1 border-b-2 border-transparent px-1 py-4 text-base font-medium whitespace-nowrap text-gray-900 aria-selected:border-indigo-600 aria-selected:text-indigo-600">Men</button>
+              </el-tab-list>
+            </div>
+            <el-tab-panels>
+              <div class="space-y-10 px-4 pt-10 pb-8">
+                <div class="grid grid-cols-2 gap-x-4">
+                  <div class="group relative text-sm">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-01.jpg" alt="Models sitting back to back, wearing Basic Tee in black and bone." class="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75" />
+                    <a href="#" class="mt-6 block font-medium text-gray-900">
+                      <span aria-hidden="true" class="absolute inset-0 z-10"></span>
+                      New Arrivals
+                    </a>
+                    <p aria-hidden="true" class="mt-1">Shop now</p>
+                  </div>
+                  <div class="group relative text-sm">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-02.jpg" alt="Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees." class="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75" />
+                    <a href="#" class="mt-6 block font-medium text-gray-900">
+                      <span aria-hidden="true" class="absolute inset-0 z-10"></span>
+                      Basic Tees
+                    </a>
+                    <p aria-hidden="true" class="mt-1">Shop now</p>
+                  </div>
+                </div>
+                <div>
+                  <p id="women-clothing-heading-mobile" class="font-medium text-gray-900">Clothing</p>
+                  <ul role="list" aria-labelledby="women-clothing-heading-mobile" class="mt-6 flex flex-col space-y-6">
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Tops</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Dresses</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Pants</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Denim</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Sweaters</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">T-Shirts</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Jackets</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Activewear</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Browse All</a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p id="women-accessories-heading-mobile" class="font-medium text-gray-900">Accessories</p>
+                  <ul role="list" aria-labelledby="women-accessories-heading-mobile" class="mt-6 flex flex-col space-y-6">
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Watches</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Wallets</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Bags</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Sunglasses</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Hats</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Belts</a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p id="women-brands-heading-mobile" class="font-medium text-gray-900">Brands</p>
+                  <ul role="list" aria-labelledby="women-brands-heading-mobile" class="mt-6 flex flex-col space-y-6">
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Full Nelson</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">My Way</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Re-Arranged</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Counterfeit</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Significant Other</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div hidden class="space-y-10 px-4 pt-10 pb-8">
+                <div class="grid grid-cols-2 gap-x-4">
+                  <div class="group relative text-sm">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg" alt="Drawstring top with elastic loop closure and textured interior padding." class="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75" />
+                    <a href="#" class="mt-6 block font-medium text-gray-900">
+                      <span aria-hidden="true" class="absolute inset-0 z-10"></span>
+                      New Arrivals
+                    </a>
+                    <p aria-hidden="true" class="mt-1">Shop now</p>
+                  </div>
+                  <div class="group relative text-sm">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-02-image-card-06.jpg" alt="Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt." class="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75" />
+                    <a href="#" class="mt-6 block font-medium text-gray-900">
+                      <span aria-hidden="true" class="absolute inset-0 z-10"></span>
+                      Artwork Tees
+                    </a>
+                    <p aria-hidden="true" class="mt-1">Shop now</p>
+                  </div>
+                </div>
+                <div>
+                  <p id="men-clothing-heading-mobile" class="font-medium text-gray-900">Clothing</p>
+                  <ul role="list" aria-labelledby="men-clothing-heading-mobile" class="mt-6 flex flex-col space-y-6">
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Tops</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Pants</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Sweaters</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">T-Shirts</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Jackets</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Activewear</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Browse All</a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p id="men-accessories-heading-mobile" class="font-medium text-gray-900">Accessories</p>
+                  <ul role="list" aria-labelledby="men-accessories-heading-mobile" class="mt-6 flex flex-col space-y-6">
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Watches</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Wallets</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Bags</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Sunglasses</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Hats</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Belts</a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p id="men-brands-heading-mobile" class="font-medium text-gray-900">Brands</p>
+                  <ul role="list" aria-labelledby="men-brands-heading-mobile" class="mt-6 flex flex-col space-y-6">
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Re-Arranged</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Counterfeit</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">Full Nelson</a>
+                    </li>
+                    <li class="flow-root">
+                      <a href="#" class="-m-2 block p-2 text-gray-500">My Way</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </el-tab-panels>
+          </el-tab-group>
     </nav>
 
     <!-- Hero Section -->
@@ -157,12 +362,12 @@
           <div class="pt-4 flex gap-4">
             <a
               href="#shop"
-              class="bg-old-lace text-dark-slate-grey px-8 py-3 rounded-none font-bold hover:bg-white transition-colors"
+              class="bg-old-lace text-center text-dark-slate-grey px-8 py-3 rounded-none font-bold hover:bg-white transition-colors"
               >Shop Now</a
             >
             <a
               href="#fabrics"
-              class="border border-old-lace text-old-lace px-8 py-3 rounded-none font-bold hover:bg-old-lace hover:text-dark-slate-grey transition-colors"
+              class="border border-old-lace text-old-lace text-center px-8 py-3 rounded-none font-bold hover:bg-old-lace hover:text-dark-slate-grey transition-colors"
               >Explore Fabrics</a
             >
           </div>
