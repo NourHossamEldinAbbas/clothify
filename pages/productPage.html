@@ -14,6 +14,54 @@
     <script src="../assets/js/data.js"></script>
     <script src="../assets/js/clickOnProducts.js"></script>
 
+    <style>
+      /* Color picker styles */
+      input[type="radio"][name="color"] {
+        display: none;
+      }
+
+      input[type="radio"][name="color"]:checked + .color-circle {
+        outline: 3px solid;
+        outline-offset: 2px;
+      }
+
+      input[type="radio"][name="color"][value="white"]:checked + .color-circle {
+        outline-color: #ffffff;
+      }
+
+      input[type="radio"][name="color"][value="gray"]:checked + .color-circle {
+        outline-color: #6b7280;
+      }
+
+      input[type="radio"][name="color"][value="black"]:checked + .color-circle {
+        outline-color: #000000;
+      }
+
+      input[type="radio"][name="color"][value="brown"]:checked + .color-circle {
+        outline-color: #b45309;
+      }
+
+      .color-label {
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .color-label:hover {
+        transform: scale(1.1);
+      }
+
+      .color-label:active {
+        transform: scale(0.95);
+      }
+
+      .color-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        transition: outline 0.2s;
+      }
+    </style>
+
     <script>
       tailwind.config = {
         theme: {
@@ -86,19 +134,48 @@
                 <div class="flex flex-col justify-center">
                     <div class="mb-2 text-sm text-dark-slate-grey/60 font-bold uppercase tracking-widest">
                         ${product.category} / ${product.material}
-                    </div>
-                    
+                </div>
+
+                <div class="flex flex-row justify-between items-center mb-6">
                     <h1 class="text-4xl md:text-5xl font-serif font-bold text-dark-slate-grey mb-4">
                         ${product.name}
                     </h1>
-
-                    <div class="flex items-center gap-4 mb-6 text-xl">
+                    <div class="flex items-center gap-4 mb-6 text-3xl">
                         ${
                           product.sale_price
                             ? `<span class="font-bold text-red-600">${product.sale_price} EGP</span>
                                <span class="line-through text-dark-slate-grey/40">${product.price} EGP</span>`
                             : `<span class="font-bold text-dark-slate-grey">${product.price} EGP</span>`
                         }
+                    </div>
+                </div>
+                  <div class="mb-6">
+                    <h1 class="text-lg md:text-xl font-serif text-dark-slate-grey/80 mb-6">
+                        Color
+                    </h1>
+                    <fieldset aria-label="Choose a color" class="mt-4">
+                        <div class="flex items-center gap-5">
+                          <label class="color-label">
+                            <input type="radio" name="color" value="white" />
+                            <div class="color-circle" style="background-color: #ffffff; border: 1px solid #d1d5db;"></div>
+                          </label>
+                          
+                          <label class="color-label">
+                            <input type="radio" name="color" value="gray" />
+                            <div class="color-circle" style="background-color: #d1d5db;"></div>
+                          </label>
+                          
+                          <label class="color-label">
+                            <input type="radio" name="color" value="black" />
+                            <div class="color-circle" style="background-color: #000000;"></div>
+                          </label>
+                          
+                          <label class="color-label">
+                            <input type="radio" name="color" value="brown" />
+                            <div class="color-circle" style="background-color: #b45309;"></div>
+                          </label>
+                        </div>
+                    </fieldset>
                     </div>
 
                     <p class="text-dark-slate-grey/80 leading-relaxed mb-8">
@@ -139,11 +216,15 @@
             `;
 
         // Add event listener to the "Add to Cart" button
-        const addToCartBtn = document.getElementById("add-to-cart-product-page");
+        const addToCartBtn = document.getElementById(
+          "add-to-cart-product-page"
+        );
         if (addToCartBtn) {
           addToCartBtn.addEventListener("click", () => {
-            const numberOfProductsElement = document.querySelector(".numberOfProducts");
-            let currentCount = parseInt(numberOfProductsElement.textContent) || 0;
+            const numberOfProductsElement =
+              document.querySelector(".numberOfProducts");
+            let currentCount =
+              parseInt(numberOfProductsElement.textContent) || 0;
             currentCount += 1;
             numberOfProductsElement.textContent = currentCount;
             localStorage.setItem("cartCount", currentCount);
