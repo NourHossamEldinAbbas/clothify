@@ -49,7 +49,7 @@ const products = [
         sale_price: null,
         category: "Accessories",
         image: "https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?q=80&w=500&auto=format&fit=crop",
-        description: "Genuine leather satchel with adjustable straps. Durable and stylish for work or travel.",
+        description: "A brown satchel that actually looks like it was made by someone who cared. The leather has that warm, earthy tone that gets better the more you use it, with natural grain and slight variations that give it character instead of looking factory-flat. The bag holds its shape without feeling stiff, and the texture is smooth enough to feel premium but still rugged enough to handle daily use. The main compartment is roomy — not oversized, not cramped — just the right amount of space for your essentials: tablet, notebook, wallet, keys, whatever you usually carry. Inside, you get a couple of practical pockets that keep things organized instead of turning the bag into a black hole. The flap closes securely with a simple buckle or magnetic clasp depending on the model, and it doesn’t look bulky or overdesigned.The strap is adjustable, comfortable on the shoulder, and strong enough to take a beating without fraying.<br><br> Overall, it’s the kind of satchel that works for casual outfits, work, university, or travel. It’s clean, classic, and reliable — a piece you grab every day without thinking twice because it does exactly what it’s supposed to do and looks good doing it.",
         material: "Leather",
         stock: 5,
         sizes: ["One Size"],
@@ -67,14 +67,11 @@ function getAboutThisItem(id) {
     const product = getProductById(id);
     const aboutHTML = `
     <div class="m-3 flex flex-col">
-     <div>
-      <h2 class="text-2xl font-bold mb-4">About This Item</h2>
-    </div>
     <div class="ml-3">
-        <ul class="list-disc list-inside text-gray-700">
-            <li><strong>Material:</strong> ${product.material}</li>
-            <li><strong>Available Sizes:</strong> ${product.sizes.join(', ')}</li>
-            <li><strong>Available Colors:</strong> ${product.colors.join(', ')}</li>
+        <ul class="list-disc list-inside text-dark-slate-grey/80 leading-relaxed">
+            <li>Only the best materials</li>
+            <li>Ethically and locally made</li>
+            <li>Durable stitching for long-lasting wear</li>
         </ul>
     </div>
     </div>
