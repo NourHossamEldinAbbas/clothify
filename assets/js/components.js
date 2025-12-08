@@ -181,7 +181,8 @@ function loadNavbar() {
           </div>
         </div>
       </div>
-    </nav>`;
+    </nav>
+    <div class="h-20"></div>`;
 
   const navPlaceholder = document.getElementById("navbar-placeholder");
   if (navPlaceholder) navPlaceholder.innerHTML = navbarHTML;
